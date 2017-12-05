@@ -1,0 +1,17 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbspSERIAL NO&nbsp{{main.eid}}
+    .pull-right
+      ul.nav.nav-tabs
+        li(ui-sref-active="active")
+          a(ui-sref="main.pers({sn: main.eid})")
+            small
+              strong DETAILS
+  .panel-body
+    .row
+      .col-md-12
+        include iotview.jade
+

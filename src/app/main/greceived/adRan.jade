@@ -1,0 +1,52 @@
+#adRan.modal.fade(role="dialog", style="max-height: calc(100vh - 210px);overflow-y: auto;")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Add Item Details By Range&nbsp
+          input(type="checkbox", name="manual", data-dismiss="modal", data-toggle="modal", data-target="#adSer")
+          | &nbspInput Manually
+        .modal-body
+          form(role="form")
+            .form-group.col-md-6
+              statinfo
+                label
+                  strong
+                    small.text-info FIRST SERIAL NO
+                input.form-control(type="text", ng-model="exte.sta", style="text-transform: uppercase;")
+            .form-group.col-md-6
+              statinfo
+                label
+                  strong
+                    small.text-info LAST SERIAL NO
+                input.form-control(type="text", ng-model="exte.las")
+            .form-group.col-md-12
+              button.btn.btn-sm.btn-info(ng-click="exte.calc(exte.sta,exte.las)") Submit
+          .row
+            .col-md-12
+              statinfo
+                strong
+                  small.text-info ITEM SUBMITTED
+              table.table.table-striped.table-float
+               tr
+                 th Serial NO
+               tr(ng-repeat="x in exte.mes")
+                 td {{x.ser}}
+          .row
+            .col-md-12
+              statinfo
+                strong
+                  small.text-info INVENTORY
+              table.table.table-striped
+                tr
+                  th Serial NO
+                tr(ng-repeat="x in exte.showser")
+                  td {{x.sno}}
+        .modal-footer
+          button.btn.btn-info.btn-sm(ng-click="exte.cong()", data-dismiss="modal", style="float: left;") Confirm
+          button.btn.btn-default.btn-sm(data-dismiss="modal",ng-click="exte.clear()", style="float: right;") Close
+

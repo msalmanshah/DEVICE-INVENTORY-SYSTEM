@@ -1,0 +1,92 @@
+.row
+  .col-md-10.col-md-offset-1
+    .row
+      form#f1(role="form")
+        .row
+          .form-group.col-md-6
+            statinfo
+              label
+                strong
+                  small.text-info RECEIPT NUMBER
+              input.form-control(type="text", readonly)
+          .form-group.col-md-6
+            statinfo
+              label
+                strong
+                  small.text-info RECEIPT DATE
+              datepicker(date-format="yyyy-MM-dd", date-set="{{ acc.currdate | date: 'yyyy-MM-dd' }}")
+                input.form-control(type="text", ng-model="acc.form1.recDt")
+        .row
+          .form-group.col-md-12
+            statinfo
+              label
+                strong
+                  small.text-info MODE
+              select.form-control.selectpicker#dmod(ng-init="acc.form1.docMd='ADV'", ng-model="acc.form1.docMd")
+                option(value='CSH') Cash
+                option(value='CHQ') Cheque
+                option(value='TTR') Bank Transfer
+                option(value='CRD') Card
+                option(value='IBT') Instant Bank Transfer
+                option(value='GRO') Inter Bank GIRO
+                option(value='ADV') Bank Advice
+        .row
+          .form-group.col-md-6
+            statinfo
+              label
+                strong
+                  small.text-info DOCUMENT REFERENCE
+              input.form-control(type="text", ng-model="acc.form1.docRf", ng-disabled="acc.form1.docMd=='CSH'")
+          .form-group.col-md-6
+            statinfo
+              label
+                strong
+                  small.text-info DOCUMENT DATE
+              datepicker(date-format="yyyy-MM-dd", date-set="{{ acc.currdate | date: 'yyyy-MM-dd' }}")
+                input.form-control(type="text", ng-model="acc.form1.docDt", ng-disabled="acc.form1.docMd=='CSH'")
+        .row
+          .form-group.col-md-12
+            statinfo
+              label
+                strong
+                  small.text-info NARRATION
+              textarea.form-control(type="text", ng-model="acc.form1.narr")
+    <hr>
+    .row
+      button.btn.btn-danger.btn-sm(ng-click="acc.tgl()") {{ acc.sst }}
+    .row(ng-if="acc.csvst")
+      <ng-csv-import class="import" content="acc.csv.content", header="acc.csv.header", header-visible="acc.csv.headerVisible", separator="acc.csv.separator", separator-visible="acc.csv.separatorVisible", result="acc.csv.result", upload-button-label="acc.csv.uploadButtonLabel", accept="acc.csv.accept"></ng-csv-import>
+    .row(ng-if="acc.csv.result")
+      .well.well-sm
+         h6 File Selected!
+         button.btn.btn-danger.btn-sm(ng-click="acc.upcsv(acc.csv.result)") Upload File
+    br
+    .row
+      table.table.table-striped.table-condensed.table-bordered(class='colort')
+        tr
+          th SN
+          th REF
+          th Amount
+        tr(ng-repeat="dt in acc.getDetails()")
+          td
+            | {{dt.sn}}
+          td
+            | {{dt.ref}}
+          td
+            | {{dt.amt}}
+    .row
+      .col-md-2
+        button.btn.btn-primary.btn-sm(data-toggle="modal", data-target="#dtmodal") Add Details
+      .col-md-2
+        button.btn.btn-default.btn-sm(ng-click="acc.resetD()") Reset Table
+      .col-md-8
+        | &nbsp&nbsp
+    .row
+      .col-md-8
+        | &nbsp&nbsp
+      .col-md-2
+        button.btn.btn-default.btn-sm.pull-right(type="button") Post
+      .col-md-2
+        button.btn.btn-primary.btn-sm.pull-right(ng-click="acc.save()") Save
+
+    include accmod.jade

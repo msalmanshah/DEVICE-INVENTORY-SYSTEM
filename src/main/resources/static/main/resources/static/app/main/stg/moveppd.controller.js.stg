@@ -1,0 +1,63 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('k7')
+    .controller('MovePpdController', MovePpdController)
+    ;
+
+
+  function MovePpdController($http,$state,$log) {
+    var vm = this;
+
+    vm.form = {};
+  
+    $http.get("/api/refs/plans")
+    .then( function(response) {
+         vm.plnlst = response.data;
+    });
+
+    vm.mvsub = function() {
+      $log.log("move sub");
+      var ff = {};
+      ff.sno = vm.form.sno;
+      ff.sub = vm.form.sub;
+      ff.sim = vm.form.sim;
+      ff.acn = vm.form.acn;
+      ff.adr = vm.form.adr;
+      ff.zip = vm.form.zip;
+      ff.idn = vm.form.idn;
+      ff.pln = vm.form.pln;
+
+      vm.fff = ff;
+
+      $http.post("/api/mvsub", ff)
+        .then(
+        function (response) {
+          vm.mvstatus = response;
+        }
+        );
+    }
+    
+    vm.getppd = function() {
+
+      var url = "/api/ttsa/a/"+vm.form.sno;
+
+      $http.get(url)
+        .then(function(response) {
+
+          vm.form.rf1  = response.data.accountid;
+          vm.form.sub  = response.data.firstname || ''; 
+          if (response.data.lastname) { vm.form.sub += ' ' + response.data.lastname; }
+          vm.form.adr  = response.data.addr1 || ''; 
+          if (response.data.addr2)    { vm.form.adr += ' ' + response.data.addr2; }
+          vm.form.zip  = response.data.postalcode || '';
+          vm.form.idn  = response.data.personalidentificationnumber || '';
+          vm.form.sim  = response.data.imsi;
+          vm.form.acn  = vm.form.sub;
+
+       });
+    }
+  }
+
+})();

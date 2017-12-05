@@ -1,0 +1,59 @@
+.panel.with-nav-tabs.panel-defd
+          .panel-heading.clearfix
+            .pull-left
+              h6.panel-title.top5
+                strong.text-muted
+                  | &nbsp&nbspSNO&nbsp
+            .pull-right
+              ul.nav.nav-tabs
+                li(ui-sref-active="active")
+                  a
+                    small
+                      strong INVENTORY
+          .panel-body
+            .row
+              .col-md-12
+                table.table.table-striped.table-hover(st-table="inve.holditem", st-safe-src="inve.items")
+                  thead
+                    tr
+                      th(st-sort="scd")
+                        medium.text-info Stock ID
+                      th(st-sort="sno")
+                        medium.text-info Serial No
+                      th(st-sort="rdt")
+                        medium.text-info Date 1st Received
+                      th(st-sort="ldt")
+                        medium.text-info Date Received at Location
+                      th(st-sort="loc")
+                        medium.text-info Location
+                      th(st-sort="sta")
+                        medium.text-info Status
+                      tr
+                        th
+                          input.input-sm.form-control(st-search="scd", placeholder="Find Stock ID..", type="search")
+                        th
+                          input.input-sm.form-control(st-search="sno", placeholder="Find Serial No..", type="search")
+                        th
+                          input.input-sm.form-control(st-search="loc", placeholder="Find Location..", type="search")
+                        th
+                          input(type="checkbox", name="inve", ng-click="inve.go2()") 
+                          | &nbspShow by Stock 
+                  tbody
+                    tr(ng-repeat="x in inve.holditem")
+                      td
+                        | {{x.scd}}
+                      td
+                        | {{x.sno}}
+                      td
+                        | {{x.rdt}}
+                      td
+                        | {{x.ldt}}
+                      td
+                        | {{x.loc}}
+                      td
+                        | {{x.sta}}
+                  tfoot
+                    tr
+                      td.text-center(colspan="12")
+                        div(st-pagination="", st-items-by-page="10", st-displayed-pages="7")
+

@@ -1,0 +1,23 @@
+tab-pane.fade.in.active(id="usearchtp1")
+  .row
+    .col-md-12
+      .pull-right
+        | &nbsp&nbsp
+  .row
+    .col-md-12
+      include acclst.jade
+
+  <hr>
+  .row
+    .col-md-12
+      statinfo
+        label
+          strong
+            small.text-info SELECT RECEIPT DATE
+  .row
+    .col-md-6
+      datepicker(date-format="yyyy-MM-dd", date-set="{{ acc.currdate | date: 'yyyy-MM-dd' }}")
+        input.form-control(type="text", ng-model="acc.dsr")
+    .col-md-6
+      a(ng-click="acc.getdr(acc.dsr)", target="_blank", ng-href="/pdf/report/{{acc.dsr}}")
+        button.btn.btn-danger.btn-sm(type="button") Get Daily Report

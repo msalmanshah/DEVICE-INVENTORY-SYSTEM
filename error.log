@@ -1,0 +1,16 @@
+
+Illegal x-position for text: This is another page
+
+The error occurred when executing:
+ at /Library/Perl/5.18/PDF/Reuse.pm line 433.
+	PDF::Reuse::prText('This is another page') called at mkp.pl line 171
+
+Situation when the error occurred
+
+   Bytes written to the current pdf-file,    pos    = 485097
+   Object processed, not necessarily written objNr  = 194
+   Current pdf-file,                         utfil  = -
+   File logging the run,                     runfil = undef
+   Local time                                       = Sun Sep 25 08:10:06 2016
+
+

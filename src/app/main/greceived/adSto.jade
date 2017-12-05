@@ -1,0 +1,27 @@
+#adSto.modal.fade(role="dialog")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Add Stock Details
+        .modal-body
+          form(role="form")
+            .form-group.col-md-12
+              statinfo
+                label
+                  strong
+                    small.text-info StockID :
+                input.form-control(type="text", ng-model="exte.sto", style="text-transform: uppercase;")
+            .form-group.col-md-12
+              statinfo
+                label
+                  strong
+                    small.text-info Quantity :
+                input.form-control(type="text", ng-model="exte.qty")
+        .modal-footer
+          button.btn.btn-sm.btn-info(data-dismiss="modal", ng-click="exte.add();exte.ini(exte.sto)", style="float: left;") Confirm
+          button.btn.btn-sm.btn-default(data-dismiss="modal", style="float: right;") Close 

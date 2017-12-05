@@ -1,0 +1,20 @@
+container
+  include unv/navx.jade
+  .container
+    .col-md-6
+      section#content
+        form
+          h5.small.text-muted LOG MASUK KE KHAIRAT PKKF2
+          .form-group
+            input#username.form-control(type='text', placeholder='Emel', required='')
+          .form-group
+            input#password.form-control(type='password', placeholder='Katalaluan', required='')
+          br
+          button.btn.btn-info(type="submit") Log Masuk
+          div
+            br
+          div
+            a.text-danger(href='#hilangakses')
+              | Hilang kata-laluan?
+          div
+            a(href='#daftarakses') Daftar kalau belum mendapat akses.

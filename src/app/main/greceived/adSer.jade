@@ -1,0 +1,45 @@
+#adSer.modal.fade(role="dialog", style="max-height: calc(100vh - 210px);overflow-y: auto;")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Add Item Details Manually&nbsp
+          input(type="checkbox", name="range", data-dismiss="modal", data-toggle="modal", data-target="#adRan")
+          | &nbspInput By Range 
+        .modal-body
+          form(role="form")
+            .form-group.col-md-12
+              statinfo
+                label
+                  strong
+                    small.text-info SERIAL NO
+                input.form-control(type="text", ng-model="exte.ser", style="text-transform: uppercase;")
+            .form-group.col-md-12
+              button.btn.btn-sm.btn-info(ng-click="exte.addSer()") Add
+          .row
+            .col-md-12
+              statinfo
+                strong
+                  small.text-info ITEM SUBMITTED
+              table.table.table-striped.table-float
+                tr
+                  th Serial No
+                tr(ng-repeat="x in exte.sern")
+                  td {{x.ser}}
+          .row
+            .col-md-12
+              statinfo
+                strong
+                  small.text-info INVENTORY
+              table.table.table-striped
+                tr
+                  th Serial No
+                tr(ng-repeat="x in exte.showser")
+                  td {{x.sno}}
+        .modal-footer
+          button.btn.btn-info.btn-sm(data-dismiss="modal",ng-click="exte.conf2()",  style="float: left;") Confirm
+          button.btn.btn-default.btn-sm(data-dismiss="modal",ng-click="exte.clear()", style="float: right;") Close

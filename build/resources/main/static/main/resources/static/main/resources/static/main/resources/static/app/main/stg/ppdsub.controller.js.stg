@@ -1,0 +1,29 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('k7')
+    .controller('PpdsubController', PpdsubController)
+    ;
+
+  /** @ngInject */
+  function PpdsubController($rootScope,$http,$stateParams,PassData) {
+
+    var vm = this;
+    //var sn = $stateParams.sn;
+
+    vm.sn = $stateParams.sn;
+    //vm.sn = "1234567"
+    vm.abc = 'abc'
+    vm.sndata =[{"ac":"A103","sn":"0101111187","si":"502151123456894","st":1,"nm":"PAUL CITIZEN","ad":null}];
+    //vm.dta = $rootScope.ppdta;
+    vm.dta = PassData.getmsg();
+/*
+    $http.get("/api/nshowsub/"+vm.sn)
+      .then(function(response) {
+        vm.sndata = response.data;
+      });
+*/
+  }
+})();
+

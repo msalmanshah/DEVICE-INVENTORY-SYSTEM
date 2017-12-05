@@ -1,0 +1,43 @@
+.col-md-4
+  .panel.with-nav-tabs.panel-default
+    .panel-heading.clearfix
+      .pull-left
+        h6.panel-title.top10
+          strong &nbsp&nbsp
+      .pull-left
+        h6.text-hide
+          small {{main.crit}}
+      .pull-right
+        ul.nav.nav-tabs
+          li.active
+            a(href='#t1p1', data-toggle='tab')
+              small
+                strong SUBSCRIBERS
+          li.disabled
+            a(href='#t1p2', data-toggle='tab')
+              small
+                strong ACTIVATIONS
+    .panel-body
+      .tab-content
+        #t1p1.tab-pane.fade.in.active
+          .row
+            .form-group
+              .col-md-9
+                input.form-control(ng-model="main.crit" type="text" placeholder="Account|SNO|SIM|Name...")
+              .col-md-3
+                button.btn.btn-danger.btn-sm(ng-click="main.look4(main.crit)")
+                  |...
+                  span.glyphicon-glyphicon-search(aria-hidden="true")
+          .row
+            .col-md-12
+              statinfo
+                strong
+                  small.text-info &nbsp
+                br
+          .row
+            .col-md-12
+              include subslist.jade
+        #t1p2.tab-pane.fade
+          .row
+            p.
+              test

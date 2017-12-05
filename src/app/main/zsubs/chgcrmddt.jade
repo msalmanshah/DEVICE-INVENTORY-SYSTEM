@@ -1,0 +1,15 @@
+div(ng-controller="CctlController as cc")
+  form#f1(role="form")
+    .form-group
+      statinfo
+        label
+          strong
+            small.text-info CURRENT CREDIT LIMIT
+        input.form-control(type="number", ng-model="cc.form.ocrl", readonly)
+    .form-group
+      statinfo
+        label
+          strong
+            small.text-info NEW CREDIT LIMIT
+        input.form-control(type="number", ng-model="cc.form.crl")
+    button.btn.btn-info(ng-click="cc.b2()") Change

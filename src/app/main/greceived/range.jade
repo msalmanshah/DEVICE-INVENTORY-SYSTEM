@@ -1,0 +1,36 @@
+form
+  .form-group.col-md-4
+    statinfo
+      label
+        strong
+          small.text-info STOCK ID :
+        input.form-control(type="text")
+  .form-group.col-md-4
+    statinfo
+      label
+        strong
+          small.text-info STARTING SERIAL NO :
+      input.form-control(type="text", ng-model="exte.sta")
+  .form-group.col-md-4
+    statinfo
+      label
+        strong
+          small.text-info LAST SERIAL NO :
+      input.form-control(type="text", ng-model="exte.las")
+  br
+  .form-group.col-md-12
+    button.btn.btn-success.btn-md(ng-click="exte.calc(exte.sta,exte.las)") Confirm
+  br
+  br
+  div
+    p {{exte.num1}} 
+    p {{exte.num2}}
+    p {{exte.ran}}
+    p {{exte.tes}}
+    table.table.table-striped.table-float
+      tr
+        th SerialNo
+      tr(ng-repeat="x in exte.mes")
+        td {{x.ser}}
+        
+

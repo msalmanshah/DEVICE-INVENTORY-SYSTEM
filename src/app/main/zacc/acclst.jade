@@ -1,0 +1,22 @@
+
+table.table.table-striped.table-condensed.top-30(st-table,st-safe-src="acc.dta")
+  thead
+    tr.text-muted
+      th
+        | {{ acc.dta.hd.fur }}
+      th
+        | {{ acc.dta.hd.one }}
+      th
+        | {{ acc.dta.hd.tre }}
+  tbody
+    tr(ng-repeat="row in acc.dta.rs")
+      th
+        | {{ row.fur }}
+      td
+        | {{ row.one | date: 'yyyy-MM-dd' }}
+      td.pull-right
+        | {{ row.tre | currency}}
+  tfoot
+    tr
+      td.text-center(colspan="5")
+        div(st-pagination="", st-items-by-pages="itemsByPage",st-displayed-pages="5")

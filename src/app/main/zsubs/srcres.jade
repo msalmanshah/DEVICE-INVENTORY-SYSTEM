@@ -1,0 +1,39 @@
+tab-pane.fade.in.active(id="usearchtp1")
+  .row
+    .col-md-12
+      .pull-right
+        //button.btn.btn-primary.btn-sm(ng-disabled, data-toggle="modal",data-target="#nsmodal") New Account
+        //button.btn.btn-primary.btn-sm(data-toggle="modal",data-target="#mvmodal") Move From Prepaid
+  .row
+    .form
+      .form-group
+        .col-md-8
+          input.form-control(ng-model="subs.crit" type="text" placeholder="Account|Patients|Family|...")
+          h6.text-danger
+            | {{subs.srcst}}
+          div(ng-if="subs.dbg")
+            h6.text-success
+              | {{subs.log}}
+        .col-md-4
+          .pull-left
+            button.btn.btn-danger.btn-sm(ng-click="subs.look4(subs.crit)")
+              | Find
+              span.glyphicon-glyphicon-search(aria-hidden="true")
+          .pull-right
+            button.btn.btn-default.btn-sm(ng-click="subs.reset()")
+              | Reset
+              span.glyphicon-glyphicon-search(aria-hidden="true")
+      //include unv/nsmodal.jade
+      //include ../modl/mvmodal.jade
+  //
+    .row
+    .col-md-12
+      statinfo
+        strong
+          small.text-info &nbsp
+        br
+      p
+        | {{main.mmm}}
+  .row
+    .col-md-12
+      include srslst.jade

@@ -1,0 +1,19 @@
+
+table.table.table-striped.table-condensed.top-30(st-table,st-safe-src="bill.dta")
+  thead
+    tr.text-muted
+      th
+        | {{bill.dta.hd.one}}
+      th
+        | {{bill.dta.hd.two}}
+      th
+        | {{bill.dta.hd.tre}}
+  tbody
+    tr(ng-repeat="row in bill.dta.rs" ng-click="main.clicksub(row.ky)")
+      td
+        | {{row.one}}  
+      th
+        | {{row.two}}
+        //a.text-info(ui-sref="home.showasub({sn: row.two})") {{row.two}}
+      td
+        | {{row.tre}}

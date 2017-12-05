@@ -1,0 +1,121 @@
+.row(ng-if="bxc.dbg")
+  p In bill.pdr.x state, billpdrx.jade
+.row
+  .col-md-6
+    p &nbsp;
+  .col-md-3
+    button.btn.btn-default.btn-sm.pull-right(type='button')
+      | Edit
+  .col-md-3
+    button.btn.btn-danger.btn-sm.pull-right(type='button')
+      | Generate New Cycle
+<hr>
+.row(ng-if="bxc.dbg")
+  p
+    | info={{bxc.info}}
+  p
+    | log={{bxc.log}}
+  p
+    | dta={{bxc.dta}}
+.row
+  .col-md-4
+    statinfo
+      strong
+        small.text-info PERIOD REF
+      br
+      | {{bxc.dta[0].pdr}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info STATUS
+      br
+      | {{bxc.dta[0].sta | StatP}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info BILL GROUP
+      br
+      | {{bxc.dta[0].grp}}
+.row
+  .col-md-4
+    statinfo
+      strong
+        small.text-info START DATE
+      br
+      | {{bxc.dta[0].pds | date: 'yyyy-MM-dd'}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info END DATE
+      br
+      | {{bxc.dta[0].xdt | date: 'yyyy-MM-dd'}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info DUE DATE
+      br
+      | {{bxc.dta[0].due | date: 'yyyy-MM-dd'}}
+.row
+  .col-md-4
+    statinfo
+      strong
+        small.text-info INVOICE DATE
+      br
+      | {{bxc.dta[0].inv | date: 'yyyy-MM-dd'}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info BILL GEN DATE
+      br
+      | {{bxc.dta[0].gen | date: 'yyyy-MM-dd'}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info POSTED DATE
+      br
+      | {{bxc.dta[0].gen | date: 'yyyy-MM-dd'}}
+<hr>
+.row
+  .col-md-8
+    statinfo
+      strong
+        small.text-info BILLING MESSAGE
+  .col-md-2
+    button.btn.btn-primary.btn-sm.pull-right(data-toggle="modal", data-target="#mvmodal")
+      | Edit Message
+  .col-md-2
+    button.btn.btn-default.btn-sm.pull-right(ng-click="bxc.usePmsg()")
+      | Use Previous
+br
+.row
+  .col-md-12
+    .well.well-sm
+      | {{bxc.dta[0].msgt}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info BILLING IMAGE
+.row
+  .col-md-8
+    input#inp(type="file", ng-model="bxc.file", accept="image/*", base-sixty-four-input, required, onload="bxc.onLoad")
+  .col-md-2
+    button.btn.btn-primary.btn-sm.pull-right#button(ng-click="bxc.addimg()")
+      | Upload Graphic
+  .col-md-2
+    button.btn.btn-default.btn-sm.pull-right(ng-click="bxc.usepimg()")
+      | Use Previous
+br
+.row
+  .col-md-12
+    .well.well-sm
+      img(ng-src="data:image/(png|jpeg);base64,{{bxc.dta[0].msgi}}", height="100%", width="100%", ng-if="bxc.getimg")
+<hr>      
+.row
+  .col-md-12
+    button.btn.btn-danger.btn-sm(type='button')
+      | Generate Bill
+    button.btn.btn-default.btn-sm(type='button')
+      | Post Bill
+
+include billmv.jade 

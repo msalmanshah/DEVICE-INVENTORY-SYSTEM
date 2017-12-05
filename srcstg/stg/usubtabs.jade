@@ -1,0 +1,27 @@
+a.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li.active
+          a(href="#usubtabsp1", data-toggle="tab")
+            small
+              strong BILLING
+        li
+          a(href="#usubtabsp2", data-toggle="tab")
+            small
+              strong CREDIT CONTROL
+        li
+          a(href="#usubtabsp3", data-toggle="tab")
+            small
+              strong LOGS
+  .panel-body
+    .row
+      .col-md-12
+        .tab-content
+          include usubtabsp1.jade
+          include usubtabsp2.jade
+          include usubtabsp3.jade

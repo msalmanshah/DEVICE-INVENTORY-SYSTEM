@@ -1,0 +1,21 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li.active
+          a
+            small
+              strong LIST
+  .panel-body
+    .row
+      .col-md-12
+        include billres.jade
+  .panel-footer
+    .row
+      .col-md-12
+        div(ng-if="billing.dbg")
+           p info = {{ billing.info }}

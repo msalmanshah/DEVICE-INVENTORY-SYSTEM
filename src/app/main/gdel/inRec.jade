@@ -1,0 +1,77 @@
+#inRec.modal.fade(style="max-height: calc(100vh - 50px);overflow-y: auto;")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Delivery Statement
+      .modal-body
+        .row
+          .col-md-4
+            statinfo
+              strong
+                small.text-info DELIVERY NO
+              br
+              | {{inte.del.dno}}
+          .col-md-4
+            statinfo
+              strong
+                small.text-info DELIVERY TYPE
+              br
+              | Internal
+          .col-md-4
+            statinfo
+              strong
+                small.text-info DATE
+              br
+              | {{inte.del.ddt | date: 'yyyy-MM-dd'}}
+        .row
+          .col-md-4
+            statinfo
+              strong
+                small.text-info FROM
+              br
+              | {{inte.del.frm}}
+          .col-md-4
+            statinfo
+              strong
+                small.text-info DESTINATION
+              br
+              | {{inte.rloc}}
+          .col-md-4
+            statinfo
+              strong
+                small.text-info QUANTITY
+              br
+              | {{inte.del.qty}}
+        hr
+        .row.col-md-12
+          strong
+            small.text-info LIST OF ITEMS
+          br
+          br
+          table.table.table-striped.table-float(st-table="inte.display3",st-safe-src="inte.alltrans")
+            thead
+              tr
+                th(st-sort="scd")
+                   medium.text-info Stock ID
+                th(st-sort="sno")
+                   medium.text-info Serial No
+            tbody
+              tr(ng-repeat="x in inte.display3")
+                td
+                  | {{x.scd}}
+                td
+                  | {{x.sno}}
+            tfoot
+              tr
+                td.text-center(colspan="12")
+                  div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")
+      .modal-footer
+        button.btn.btn-sm.btn-info(style="float: left;") Print
+        button.btn.btn-sm.btn-default(data-dismiss="modal", style="float: right;") Close
+
+           

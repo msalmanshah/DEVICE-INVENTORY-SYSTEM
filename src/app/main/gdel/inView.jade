@@ -1,0 +1,54 @@
+#inView.modal.fadei(style="max-height: calc(100vh - 50px);overflow-y: auto;")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Item Details
+          input(type="checkbox", name="view", ng-click="inte.getall()", ng-checked ="!inte.stat")
+          | &nbspShow All Items
+        .modal-body
+          .row.col-md-12
+            strong
+              medium.text-info STOCK ID: {{inte.ston}}
+          .row
+            .col-md-12
+             table.table.table-striped.table-float
+               tr
+                 th Serial No
+                 th Date 1st Received
+                 th Date Received at Location
+                 th Location
+                 th Status
+               tr(ng-repeat="x in inte.showser")
+                 td {{x.sno}}
+                 td {{x.rdt}}
+                 td {{x.ldt}}
+                 td {{x.loc}}
+                 td {{x.sta}}
+          hr
+          .row
+            .col-md-12
+              form(role="trans")
+                .form-group.col-md-12
+                  statinfo
+                    label
+                      strong
+                        small.text-info NO OF ITEMS TO TRANSFER
+                    input.form-control(type="text", ng-model="inte.qtyt") 
+                .from-group.col-md-12
+                  button.btn.btn-sm.btn-info(ng-click="inte.contra(inte.qtyt)") Confirm
+          hr
+          .row.col-md-12
+            medium.text-info ITEMS TO BE TRANSFER
+            table.table.table-striped.table-float
+              tr
+                th Serial NO
+              tr(ng-repeat="x in inte.trans")
+                td {{x.sno}}
+        .modal-footer
+          button.btn.btn-sm.btn-default(data-dismiss="modal", ng-click="inte.close()", style="float: right;") Close
+

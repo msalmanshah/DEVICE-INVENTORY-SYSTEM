@@ -1,0 +1,36 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li.active
+          a
+            small
+              strong DEVICES
+  .panel-body
+    .row
+      .col-md-12
+        tab-pane.fade.in.active(id="devices")
+          .row
+            .col-md-12
+                //table.table.table-striped.table-hover(st-table="main.display",st-safe-src="main.dvc")
+                   thead
+                      tr.text-muted
+                         th//(st-sort="eid")
+                           | DEVICE SERIAL NO
+                         th//(st-sort="nme")
+                           | DEVICE STOCK NAME
+                   tbody
+                      tr(ng-repeat="x in main.dvc" ng-click="main.click(x.sno)")
+                         th
+                           | {{x.sno}}
+                         td
+                           | {{x.scd}}
+                   tfoot
+                     // tr
+                        // td.text-center(colspan="12")
+                           // div(st-pagination="",st-items-by-page="5",st-displayed-pages="7")
+

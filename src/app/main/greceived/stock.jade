@@ -1,0 +1,44 @@
+.panel.with-nav-tabs.panel-defd
+          .panel-heading.clearfix
+            .pull-left
+              h6.panel-title.top5
+                strong.text-muted
+                  | &nbsp&nbspSNO&nbsp
+            .pull-right
+              ul.nav.nav-tabs
+                li(ui-sref-active="active")
+                  a
+                    small
+                      strong INVENTORY
+          .panel-body
+            .row
+              .col-md-12
+                table.table.table-striped.table-hover(st-table="inve.display", st-safe-src="inve.showall")
+                  thead
+                    tr
+                      th(st-sort="scd")
+                        medium.text-info Stock ID
+                      th(st-sort="qtys")
+                        medium.text-info Quantity
+                      th
+                        medium.text-info Details
+                      tr
+                        th
+                          input.input-sm.form-control(st-search="scd", placeholder="Find Stock ID..", type="search")
+                        th
+                          input(type="checkbox", name="inve", ng-click="inve.go()") 
+                          | &nbspShow All Items&nbsp
+                  tbody
+                    tr(ng-repeat="x in inve.display")
+                      td
+                        | {{x.scd}}
+                      td
+                        | {{x.qtys}}
+                      td
+                        button.btn.btn-sm.btn-info(data-toggle="modal", data-target="#inView", ng-click="inve.ini(x.scd)") Item Details
+                  tfoot
+                    tr
+                      td.text-center(colspan="12")
+                        div(st-pagination="", st-items-by-page="10", st-displayed-pages="7")
+
+include inView.jade

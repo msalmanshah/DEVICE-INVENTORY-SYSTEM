@@ -1,0 +1,16 @@
+div(ng-controller="PstController as pc")
+  table.table.table-condensed
+    thead
+      tr
+        th Name
+        th Relationship
+        th Contact Number
+        th Mechanisms
+        th Status
+    tbody
+      tr(ng-repeat="dta in pc.stk")
+        td {{ dta.nme }}
+        td {{ dta.typ }}
+        td {{ dta.sno }}
+        td {{ dta.alm }}
+        td {{ dta.sta | StatF }}

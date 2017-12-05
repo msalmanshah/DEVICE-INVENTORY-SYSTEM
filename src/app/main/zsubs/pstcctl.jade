@@ -1,0 +1,58 @@
+.row
+  .col-md-9
+    .row
+      .col-md-6
+        statinfo
+          strong
+            small.text-info CREDIT CLASS
+          br  
+          | {{ccrc.dta[0].kls}}
+      .col-md-6
+        statinfo
+          strong
+            small.text-info CREDIT LIMIT
+          br  
+          | {{ccrc.dta[0].tcl}}
+    .row
+      .col-md-6
+        statinfo
+          strong
+            small.text-info TOTAL DEPOSIT 
+          br
+          | {{ccrc.dta[0].dep}}
+      .col-md-6
+        statinfo
+          strong
+            small.text-info VIRTUAL DEPOSIT 
+          br
+          | {{ccrc.dta[0].vdp}}
+    .row
+      .col-md-6
+        statinfo
+          strong
+            small.text-info OUTSTANDING
+          br
+          | {{ccrc.dta[0].ost}}
+      .col-md-6
+        statinfo
+          strong
+            small.text-info UNBILLED
+          br
+          | {{ccrc.dta[0].unb}}
+
+    
+  .col-md-3
+    .row.pull-right
+      button.btn.btn-block.btn-danger.btn-sm(data-toggle="modal", data-target="#barmodal", ng-if="ccrc.btst")
+        | {{ccrc.sustxt}} Barr
+      button.btn.btn-block.btn-danger.btn-sm(data-toggle="modal", data-target="#unbarmodal", ng-if="ccrc.ubtst")
+        | Unbarr
+      button.btn.btn-block.btn-default.btn-sm(data-toggle="modal", data-target="#mvmodal")
+        | Change Cr Limit
+      <hr>
+      button.btn.btn-block.btn-primary.btn-sm(ng-click="ccrc.reset()")
+        | Refresh
+
+include chgcrmd.jade
+include barmd.jade
+include ubarmd.jade

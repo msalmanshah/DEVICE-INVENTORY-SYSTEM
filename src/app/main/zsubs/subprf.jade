@@ -1,0 +1,20 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbspSNO&nbsp{{subs.selectedsno}}
+    .pull-right
+      ul.nav.nav-tabs
+        li(ui-sref-active="active")
+          a(ui-sref="subs.pst({sn: subs.selectedsno})")
+            small
+              strong PROFILE
+        li(ui-sref-active="active")
+          a(ui-sref="subs.ppd({sn: subs.selectedsno})")
+            small
+              strong PREPAID
+  .panel-body
+    .row
+      .col-md-12
+        div(ui-view="tabpage")

@@ -1,0 +1,26 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('k7')
+    .controller('PstsubController', PstsubController)
+    ;
+
+  /** @ngInject */
+  function PstsubController($http,$stateParams) {
+
+    var vm = this;
+    //var sn = $stateParams.sn;
+
+    vm.sn = $stateParams.sn;
+    //vm.sn = "1234567"
+    vm.abc = 'abc'
+    vm.sndata =[{"ac":"A103","sn":"0101111187","si":"502151123456894","st":1,"nm":"PAUL CITIZEN","ad":null}];
+
+    $http.get("/api/nshowsub/"+vm.sn)
+      .then(function(response) {
+        vm.sndata = response.data;
+      });
+
+  }
+})();

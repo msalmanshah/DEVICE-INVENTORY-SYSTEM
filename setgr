@@ -1,0 +1,2 @@
+alias gb='rm -r src/main/resources/static/*; gulp build'
+alias gr='./gradlew bootRun'

@@ -1,0 +1,134 @@
+select  Category
+,       Time
+,       Qty
+,       (
+        select  sum(Qty) 
+        from    YourTable t2 
+        where   t1.Category = t2.Category 
+                and t1.Time >= t2.Time
+        ) as CatTotal
+from    YourTable t1
+
+select  Category
+,       Time
+,       Qty
+,       CatTotal
+from    (
+        select  Category
+        ,       Time
+        ,       Qty
+        ,       @sum := if(@cat = Category,@sum,0) + Qty as CatTotal
+        ,       @cat := Category
+        from    YourTable
+        cross join
+                (select @cat := '', @sum := 0) as InitVarsAlias
+        order by
+                Category
+        ,       Time
+        ) as SubQueryAlias
+order by
+        Time
+
+
+
+
+-- 0105005303
+-- 0107777996
+
+declare @t table(Col1 int, Col2 int)
+
+insert into @t values
+(1, 10),
+(2, 10),
+(3, 5),
+(4, 20),
+(5, 3)
+
+select * from
+(
+    select t1.Col1, t1.Col2, SUM(t2.Col2) as runningtotal
+    from @t t1
+    inner join @t t2 on t1.Col1 >= t2.Col1
+    group by t1.Col1, t1.Col2
+) ss
+where runningtotal <= 25
+
+
+select a.tid,a.ano,a.kls,a.sdt,a.unit,sum(b.unit) as rt
+from susg a
+inner join susg b 
+on b.sdt >= b.sdt
+where  a.kls = 'HNV'
+group by a.ano,a.kls
+order by a.ano,a.kls,a.sdt;
+
+select udt,ano,bno,rt from (
+ select a.udt,a.ano,a.bno,sum(b.vol) as rt
+ from susg a
+ inner join susg b on a.udt >= b.udt
+ group by a.udt, a.ano
+) ss
+where rt < 100;
+
+
+select tid,sdt,ano,bno,uv0, units, rt from (
+ select a.tid,a.sdt,a.ano,a.bno,a.uv0,ceil(b.uv0/60.00) as units,sum(ceil(b.uv0/60.00)) as rt
+ from susg a
+ inner join susg b on a.sdt >= b.sdt
+ group by a.ano
+) ss
+where rt < 100;
+
+select tid,ano,uv0, rt from (
+ select a.tid,a.sdt,a.ano,a.uv0,ceil(b.uv0/60.00) as units,sum(ceil(b.uv0/60.00)) as rt
+ from susg a
+ inner join susg b on a.sdt >= b.sdt
+ group by a.sdt,a.ano
+) ss
+where rt < 100;
+
+
+--  tid, kls, sdt, edt, upd, ano, bno, opr, geo, uv0, uv1, uv2, cg0, cg1, cg2, sta, glc, rf0, rf1, rf2, fl0, fl1, fl2,
+
+Last login: Wed Sep 21 13:03:25 on ttys008
+Oons-MacBook-Pro:prc oonabdullah$ cd ~/Downloads/
+Oons-MacBook-Pro:Downloads oonabdullah$ less mccmnc.csv 
+Oons-MacBook-Pro:Downloads oonabdullah$ perl -pi -e 's/\r/\n/g' mccmnc.csv|less 
+Oons-MacBook-Pro:Downloads oonabdullah$ less mccmnc.csv 
+Oons-MacBook-Pro:Downloads oonabdullah$ less mccmnc.csv 
+Oons-MacBook-Pro:Downloads oonabdullah$ 
+
+
+
+Oons-MacBook-Pro:Downloads oonabdullah$ vi mcc.pl
+Oons-MacBook-Pro:Downloads oonabdullah$ perl mcc.pl < mccmnc.csv |less
+Oons-MacBook-Pro:Downloads oonabdullah$ vi mcc.pl
+Oons-MacBook-Pro:Downloads oonabdullah$ perl mcc.pl < mccmnc.csv |less
+Oons-MacBook-Pro:Downloads oonabdullah$ vi mcc.pl
+Oons-MacBook-Pro:Downloads oonabdullah$ perl mcc.pl < mccmnc.csv >mncc.sql
+Oons-MacBook-Pro:Downloads oonabdullah$ mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 344
+Server version: 5.6.23 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use unv;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table mncc (mnc varchar(10), cc char(2), op varchar(100), primary key (mnc));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> source mncc.sql
+ERROR 1366 (HY000): Incorrect string value: '\x82\xEFES' for column 'op' at row 176
+mysql> exit
+Bye
+

@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    table.table.table-striped.table-hover(st-table="deli.disp")
+      thead
+        tr
+          th StockID
+          th SerialNo
+      tbody
+        tr
+          td TST
+          td SEA123
+      tfoot
+        tr
+          td.text-center(colspan="12")
+            div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")
+.row
+  .col-md-12
+    pull-center
+      button.btn.btn-success.btn-md Confirm  

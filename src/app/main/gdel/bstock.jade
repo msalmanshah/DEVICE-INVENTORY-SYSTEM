@@ -1,0 +1,69 @@
+.row.justify-content-between.col-md-5
+ .panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top5
+        strong.text-info
+          | &nbsp&nbspITEM AT&nbsp{{inte.cloc}}
+  .panel-body
+    table.table.table-striped.table-hover(st-table="inte.display", st-safe-src="inte.showall")
+       thead
+         tr
+           th(st-sort="scd")
+             medium.text-info Stock ID
+           th(st-sort="qtys")
+             medium.text-info Quantity
+           th
+             medium.text-info Details
+           th
+             medium.text-info Quantity Transfer
+           tr
+             th
+               input.input-sm.form-control(st-search="scd", placeholder="Find Stock ID.", type="search")
+       tbody
+         tr(ng-repeat="x in  inte.display track by $index")
+           td
+             | {{x.scd}}
+           td
+             | {{x.qtys}}
+           td
+             button.btn.btn-sm.btn-info(data-toggle="modal", data-target="#inView", ng-click="inte.ini(x.scd,x.qtys)") Item Details
+           td 
+             | {{x.qtyt}}
+       tfoot
+         tr
+           td.text-center(colspan="12")
+             div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")
+
+.col-md-7
+  .panel.with-nav-tabs.panel-defd
+   .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top5
+        strong.text-info
+          | &nbsp&nbspITEM TRANSFER
+   .panel-body
+    table.table.table-striped.table-float(st-table="inte.display2",st-safe-src="inte.alltrans")
+     thead
+       tr
+         th(st-sort="scd")
+           medium.text-info Stock ID
+         th(st-sort="sno")
+           medium.text-info Serial No
+     tbody
+       tr(ng-repeat="x in inte.display2")
+         td
+           | {{x.scd}}
+         td
+           | {{x.sno}}
+     tfoot
+       tr
+         td.text-center(colspan="12")
+           div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")  
+    br
+    medium.text-info TOTAL QUANTITY :&nbsp{{inte.alltrans.length}}
+    br
+    button.btn.btn-md.btn-info(ng-click="inte.getdn()", style="float: center;", ng-if= "inte.done") DELIVER
+    button.btn.btn-md.btn-info(data-toggle="modal", data-target="#inRec", ng-if = "!inte.done") STATEMENT
+include inView.jade
+include inRec.jade

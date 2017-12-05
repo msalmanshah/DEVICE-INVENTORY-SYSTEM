@@ -1,0 +1,213 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('k7')
+    .controller('BillingxController', BillingxController);
+
+   /** @ngInject */
+  function BillingxController($http, $stateParams, $timeout, $log) {
+    var vm = this;
+
+    vm.dbg = false;
+
+    vm.pdr = $stateParams.pdr;
+
+    vm.abc = 'abc';
+
+    vm.form = {};
+
+    $http.get("/api/billingshow/"+vm.pdr)
+    .then(function(response) {
+      vm.dta = response.data;   
+      vm.form.pdr = vm.dta[0].pdr;
+      vm.form.msg = vm.dta[0].msgt;
+      vm.checkimg(vm.dta[0].msgi);
+    });
+
+    $http.get("/api/getbmsg/"+vm.pdr)
+    .then(function(resp) {
+      vm.dta = resp.data;
+      vm.chkpdr = vm.dta[0].pdr;
+    });
+
+    vm.sub = function() {
+      if(vm.chkpdr == null) {
+        $http.post("/api/inmsg", vm.form)
+        .then(
+        function(){
+          alert("Insert Successful");
+        }, function() {
+          alert("ERROR");
+        })
+        .then(function(){
+          $timeout(function(){
+            angular.element('#btnclose').triggerHandler('click');
+          });
+        });
+      }
+      else{
+        $http.post("/api/mvmsg", vm.form)
+        .then(
+        function() {
+          alert("Update Successful");
+        }, function() {
+          alert("ERROR");
+        })
+        .then (function(){
+          $timeout(function(){
+            angular.element('#btnclose').triggerHandler('click');
+          });
+        });
+      }
+    }
+ 
+    vm.values = {};
+
+    $http.get("/api/getPmsg/"+vm.pdr)
+    .then(function(resp) {
+      vm.msgd = resp.data;
+      vm.values.pdrno = vm.pdr;
+      vm.values.prevm = vm.msgd[0].msgtext;
+    });
+
+    vm.usePmsg = function() {
+      
+/*      $http.get("/api/getPmsg/"+vm.pdr)
+      .then(function(resp) {
+        vm.msgd = resp.data;
+        vm.values.pdrno = vm.pdr;
+        vm.values.prevm = vm.msgd[0].msgtext;
+      });
+*/      if(vm.values.prevm == null){
+        alert("Empty message!");
+      }
+      else{
+        vm.inpmsg(vm.values);
+      }
+
+
+/*      $http.post("/api/inmsg", vm.form)
+      .then(
+      function() {
+        alert("Insert from previous message SUCCESSFUL");
+      }, function() {
+        alert("ERROR");
+      });
+*/    }
+
+    vm.inpmsg = function(obj){
+      $http.post("/api/inprevmsg", obj)
+      .then(
+      function() {
+        alert("Insert from previous message SUCCESSFUL");
+      }, function() {
+        alert("ERROR");
+      });
+    }
+    
+
+    vm.uimg = {};
+
+    vm.onLoad = function(e, reader, file, fileList, fileObjects, fileObj){
+      $log.log('this is handler for file reader onload event!');
+    }
+
+    vm.file = [];
+
+    vm.addimg = function(){
+      $log.log("I am in addimg() function");
+      $log.log(vm.file.base64);
+
+      vm.uimg.img = vm.file.base64;
+      vm.uimg.pdr = vm.pdr;
+      if(vm.chkpdr == null){
+        vm.upimgnm(vm.uimg);
+      } else{
+        vm.upimg(vm.uimg);
+      }
+    }  
+
+    vm.upimg = function(obj) {
+      $log.log("I am in upimg() function");
+      $http.post("/api/inimg", obj)
+      .then(
+      function(){
+        $log.log("I have done posting to Abc.groovy");
+        alert("Upload Success!");
+      }, function() {
+        alert("Error Upload!");
+      });
+    }
+
+    vm.upimgnm = function(obj) {
+      $http.post("/api/inimgnm", obj)
+      .then(
+      function(){
+        alert("Upload SUCCESS!");
+      }, function() {
+        alert("Error!");
+      });
+    }
+    
+    vm.checkimg = function(par){
+      if(par == null){
+        vm.getimg = false;
+      }
+      else{
+        vm.getimg = true;
+      }
+      
+    }
+
+    vm.imgval = {};
+ 
+    $http.get("/api/getPimg/"+vm.pdr)
+    .then(function(resp) {
+       vm.msgi = resp.data;
+       vm.imgval.pdr = vm.pdr;
+       vm.imgval.img = vm.msgi[0].msgimg;
+     });
+
+    vm.usepimg = function(){
+      $log.log("I am in usepimg()");
+/*      $http.get("/api/getPimg/"+vm.pdr)
+      .then(function(resp) {
+         vm.msgi = resp.data;
+         vm.imgval.pdr = vm.pdr;
+         vm.imgval.img = vm.msgi[0].msgimg;
+       });
+*/       if(vm.imgval.img == null){
+         alert("No Image available!");
+       }
+       else{
+         if(vm.chkpdr == null){
+           vm.inpimgnm(vm.imgval);
+         } else{
+           vm.inpimg(vm.imgval);
+         }
+       }
+    } 
+
+   vm.inpimg = function(obj){
+     $http.post("/api/inpimg", obj)
+     .then(
+     function() {
+       alert("Update from previous message SUCCESSFUL");
+     }, function() {
+       alert("ERROR");
+     });
+   }
+
+   vm.inpimgnm = function(obj){
+     $http.post("/api/inpimgnm", obj)
+     .then(
+     function(){
+       alert("Insert from previous message SUCCESSFUL");
+     }, function(){
+       alert("ERROR");
+     });
+   }
+                            
+  }
+})();

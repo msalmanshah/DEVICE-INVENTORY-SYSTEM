@@ -1,0 +1,84 @@
+
+.row
+  .col-md-3
+    statinfo
+      strong
+        small.text-info SNO
+      br
+      | {{pstsub.sndata[0].sno}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info IMSI
+      br
+      | {{pstsub.sndata[0].sim}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info STATUS
+      br
+      | {{pstsub.sndata[0].sta | StatF }}
+  .col-md-3
+    button.btn.btn-danger.btn-sm.pull-right(type='submit', ng-click="pstsub.addsub()")
+      | Add Another Sub
+      //span.glyphicon.glyphicon-edit(aria-hidden='true')
+.row
+  .col-md-9
+    statinfo
+      strong
+        small.text-info SUBSCRIBER
+      br
+      | {{pstsub.sndata[0].nme}}
+  .col-md-3
+    button.btn.btn-default.btn-sm.pull-right(type='submit', ng-click="pstsub.rtnppd()")
+      | Return to Prepaid
+.row
+  .col-md-3 
+    statinfo
+      strong
+        small.text-info ACCOUNT NO
+      br
+      | {{pstsub.sndata[0].acc}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info EMAIL
+      br
+      | {{pstsub.sndata[0].eml}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info ID DOC
+      br
+      | {{pstsub.sndata[0].idn}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info ACCOUNT STATUS
+      br
+      | {{pstsub.sndata[0].acs | StatF}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info ACCOUNT
+      br
+      | {{pstsub.sndata[0].acn}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info ADDRESS
+      br
+      | {{pstsub.sndata[0].adr}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info &nbsp
+      br
+.row
+  .col-md-12
+    include subtabs.jade
+
+

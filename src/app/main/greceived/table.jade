@@ -1,0 +1,23 @@
+.row
+  .col-md-12
+    table.table.table-striped.table-float
+      tr
+        th StockID
+        th Quantity
+        th Details
+      tr(ng-repeat="x in exte.item", ng-click="exte.ini(x.sto,x.qty)")
+        td {{x.sto}}
+        td {{x.qty}}
+        td 
+         button.btn.btn-sm.btn-info(ng-if="x.sta",data-toggle="modal", data-target="#adSer", ng-click="exte.ini(x.sto,x.qty)") Input Stock Details
+         button.btn.btn-sm.btn-info(ng-if="!x.sta",data-toggle="modal", data-target="#view", ng-click="exte.ini(x.sto,x.qty)") Item Stock Details
+.row
+  .col-md-5
+    button.btn.btn-success.btn-md(data-toggle="modal", data-target="#adSto") Add StockID
+    p {{vm.sqty}}
+
+include adSer.jade
+include adRan.jade
+include adSto.jade
+include view.jade
+include exrec.jade

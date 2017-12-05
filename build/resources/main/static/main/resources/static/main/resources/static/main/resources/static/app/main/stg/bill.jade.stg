@@ -1,0 +1,8 @@
+container
+  include unv/unav.jade
+  .container
+    .row
+      .col-md-5
+        include billlst.jade
+      .col-md-7
+        include billdtl.jade 

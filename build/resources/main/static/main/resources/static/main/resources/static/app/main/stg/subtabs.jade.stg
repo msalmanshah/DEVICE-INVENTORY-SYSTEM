@@ -1,0 +1,49 @@
+.panel.with-nav-tabs.panel-defx
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li
+          a(ui-sref="top.pst.x.bill")
+            small
+              strong BILLING
+        li
+          a(ui-sref="top.pst.x.cctl")
+            small
+              strong CREDIT CONTROL
+        li
+          a(ui-sref="top.pst.x.logs")
+            small
+              strong LOGS
+  .panel-body
+    .row
+      .col-md-12
+        div(ui-view="subtabpage")
+
+
+//
+  .pull-right
+  ul.nav.nav-tabs
+    li.active
+      a(ui-sref="top.pst.bill")
+        small
+          strong BILLING
+    li
+      a(ui-sref="top.pst.cctl")
+        small
+          strong CREDIT CONTROL
+    li
+      a(ui-sref="top.pst.logs")
+        small
+          strong LOGS
+  .row
+  .col-mid-12
+    div
+      h1 
+        | &nbsp
+    div(ui-view="subtabpage")
+
+

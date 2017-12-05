@@ -1,0 +1,67 @@
+src/app/main/zbill/billing.controller.js
+  function BillingController($http, $state) {
+      $http.get("/api/billing/4/"+c)
+        vm.log += "[look4()] ["+c+"] got http.get results on, ";
+src/app/main/zbill/billingx.controller.js
+  function BillingxController($state, $http, $stateParams, $timeout, $log){
+    $http.get("/api/billingshow/"+vm.pdr)
+      $http.get("/api/getPmsg/"+vm.pdr)
+      $http.get("/api/getPimg/"+vm.pdr)
+       $http.post("/api/mvmsg", vm.form)
+       $http.post("/api/inmsg", vm.form)
+       $http.post("/api/mvmsg", vm.vpm)
+       $http.post("/api/inmsg", vm.vpm)
+         $http.post("/api/upimg", vm.uimg)
+         $http.post("/api/inimgnm", vm.uimg)
+         $http.post("/api/upimg", vm.vpi)
+         $http.post("/api/inimgnm", vm.vpi)
+src/app/main/zplan/plan.controller.js
+  function PlanController($http, $state) {
+      $http.get("/api/plan/4/"+c)
+        vm.log += "[look4()] ["+c+"] got http.get results on, ";
+src/app/main/zplan/planx.controller.js
+  function PlanxController($http, $stateParams) {
+    $http.get("/api/planshow/"+vm.tid)
+    $http.get("/api/planshows/"+vm.tid)
+src/app/main/zsubs/ppd.controller.js
+  function PpdController($rootScope,$http,$stateParams,PassData) {
+    $http.get("/api/nshowsub/"+vm.sn)
+src/app/main/zsubs/ledger.controller.js
+  function LedgerController($http,$stateParams) {
+      $http.get("/api/"+vm.form.sel+"/"+vm.sno)
+    $http.get("/api/ldgrcv/"+vm.sno)
+src/app/main/zsubs/mvppd.controller.js
+  function MvppdController($http,$state,$log,$timeout,PassData) {
+    $http.get("/api/refs/plans")
+      $http.post("/api/mvsub", vm.form)
+      $http.get(url)
+src/app/main/zsubs/pst.controller.js
+  function PstController($http,$stateParams, $log) {
+      $http.get("/api/nshowsub/"+vm.sn)
+      $http.post("/api/ecacc/", vm.form)
+      $http.get("/api/ihis/"+vm.sn)
+src/app/main/zsubs/cctl.controller.js
+  function CctlController($log, $http, $stateParams){
+      $http.get("/api/cctl/"+vm.sno)
+      $http.post("/api/ttsa/prov/barr/"+vm.sno, vm.form2)
+      $http.post("/api/ttsa/prov/unbarr/"+vm.sno, vm.form3)
+      $http.post("/api/ccrlc", vm.form)
+src/app/main/zsubs/subs.controller.js
+  function SubsController($http,$state,$rootScope,$log,PassData) {
+      $http.get("/api/nlook/4/"+c)
+        vm.log += "[look4()] ["+c+"] got http.get results on,";
+      $http.get(url)
+src/app/main/zsubs/bill.controller.js
+  function BillController(PassBill,$log,$http,$stateParams) {
+        $http.get("/api/bills/"+vm.sno)
+        $http.get("/api/ubills/"+vm.sno)
+    $http.get("/api/bills/"+vm.sno)
+    $http.get("/api/ubills/"+vm.sno)
+      $http.post("/api/sendbillz/"+vm.getD()[0].acno+"/"+vm.getD()[0].pdrn, vm.form)
+src/app/main/zacc/accountmod.controller.js
+src/app/main/zacc/account.controller.js
+  function AccountController(AccService, $http, $log){
+    $http.get("/api/testacc")
+      $http.get("/api/report/"+dsr)
+      $http.post("/api/upadoc", vm.j)
+      $http.get("/api/acc/REC")

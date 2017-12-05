@@ -1,0 +1,45 @@
+table.table.table-condensed.table-striped(style='margin-top=20px',st-table,st-safe-src='main.ahlis')
+  thead
+    tr
+      th
+      th.text-muted
+        small NO AHLIs
+      th.text-muted
+        small NO KP
+      th.text-muted
+        small NAMA
+      th.text-muted
+        small ALAMAT
+      th.text-muted
+        small STATUs
+    tr
+      th
+      th
+        input.input-xs.form-control(st-search="'noahli'" placeholder="cari no ahli" type="search")
+      th
+        input.input-xs.form-control(st-search="'kp'" placeholder="cari no kp" type="search")
+      th
+        input.input-xs.form-control(st-search="'nama'" placeholder="cari nama" type="search")
+      th
+        input.input-xs.form-control(st-search="'alamat'" placeholder="cari alamat" type="search")
+      th
+        input.input-xs.form-control(st-search="'status'" placeholder="cari status" type="search")
+  tbody
+    tr(ng-repeat="row in main.ahlis")
+      td
+        button.btn.btn-default.btn-xs
+          span.glyphicon.glyphicon-option-pencil
+      th
+        | {{row.noahli}}
+      td
+        | {{row.kp}}
+      td
+        | {{row.nama}}
+      td
+        | {{row.alamat}}
+      td
+        | {{row.status | statusahli}}
+  tfoot
+    tr
+      td.text-center(colspan="5")
+        div(st-pagination="" st-items-by-page="5" st-displayed-pages="5")

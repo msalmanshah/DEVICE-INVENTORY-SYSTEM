@@ -1,0 +1,24 @@
+div(ng-controller="AccountController as acc")
+  form#2(role="form")
+     .row
+       .form-group.col-md-12
+         statinfo
+           label
+             strong
+               small.text-info SN
+           input.form-control(type="text", ng-model="acc.form2.sno", uib-typeahead="sno as sno.sno for sno in acc.sno | filter:$viewValue | limitTo:5")
+     .row
+       .form-group.col-md-12
+         statinfo
+           label
+             strong
+               small.text-info REF
+         input.form-control(type="text", ng-model="acc.form2.ref")
+     .row
+       .form-group.col-md-12
+         statinfo
+           label
+             strong
+               small.text-info AMOUNT
+           input.form-control(type="text", ng-model="acc.form2.amt")
+     button.btn.btn-info(ng-click="acc.addDetails();acc.resetF();") Add

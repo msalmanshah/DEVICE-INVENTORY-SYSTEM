@@ -1,0 +1,35 @@
+div(ng-controller="NewsubController as nsc")
+  .container 
+    .row
+      col-md-12
+        h4
+          strong.text-danger
+            | REGISTER A SUBSCRIBER
+  .row
+    .col-md-12
+      form.form
+        .form-group(ng-init="nsc.regtp='pers'")
+          label.radio-inline 
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="per" ng-model="main.regtp" checked=""> Personal Registration
+          label.checkbox-inline 
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="coy" ng-model="main.regtp"> Company Registration
+        .form-group
+          statinfo
+            label 
+              strong
+                small.text-info NATIONALITY
+          select(ng-model="main.setcc")
+            option(ng-repeat="opt in nsc.ccode", value="{{opt.id}}") {{opt.name}}
+        .form-group
+          statinfo
+            label 
+              strong
+                small.text-info {{main.regtp == "per" ? "NAME" : "COMPANY NAME"}}
+            input.form-control(id='i1',type='text')
+        .form-group
+          statinfo
+            label 
+              strong
+                small.text-info {{main.regtp == "per" ? "IC NO or PASSPORT" : "COMPANY REGISTRATION"}}
+            input.form-control(id='i1',type='text')
+

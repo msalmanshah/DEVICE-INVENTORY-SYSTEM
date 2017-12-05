@@ -1,0 +1,39 @@
+#bs-example-navbar-collapse-1.collapse.navbar-collapse
+  ul.nav.navbar-nav
+  ul.nav.navbar-nav.navbar-right
+    li.dropdown
+      //a.dropdown-toggle(href='#', data-toggle='dropdown')
+      a.dropdown-toggle(data-toggle='dropdown')
+        | Menu
+        b.caret
+      ul.dropdown-menu
+        li
+          a(href='#/top') Subscribers
+        li.divider
+        li
+          a(href='#/plan') Packages, Plans and Charging
+        li
+          a(href='#/bill') Billing
+        li.dropdown
+          a.dropdown-toggle(href='#', data-toggle='dropdown') 
+            | Admin
+            b.caret
+          ul.dropdown-menu
+            li
+              a(href='#') User Management
+            li
+              a(href='#') Codes Management
+            li
+              a(href='#') Serials Management
+    li.dropdown
+      a.dropdown-toggle(href='#', data-toggle='dropdown')
+        | AUser 
+        b.caret
+      ul.dropdown-menu
+        li
+          a(href='#') Profile
+        li
+          a(href='#') Log In
+        li
+          a(href='#login') Log Out
+        li.divider

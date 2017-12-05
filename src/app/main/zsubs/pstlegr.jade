@@ -1,0 +1,50 @@
+.row
+  .col-md-12
+    .row
+      .col-md-8
+        select.form-control.selectpicker#dmod(ng-init="legrc.form.sel='ldgrcv'", ng-model="legrc.form.sel", ng-change="legrc.chg()")
+          option(value='ldgrcv') Receivable
+          option(value='ldgdep') Deposit
+      .col-md-4
+        | &nbsp&nbsp&nbsp
+.row
+  .col-md-12
+    table.table.table-striped.table-condensed.top30(st-table, st-safe-src="legrc.dta")
+      thead
+        tr.text-muted
+          th
+           |  Date
+          th
+           |  Reference
+          th
+           |  Type
+          th
+            .pull-right
+              |  Dr
+          th
+            .pull-right
+              |  Cr
+          th
+            .pull-right
+              |  Balance
+      tbody
+        tr(ng-repeat="row in legrc.dta")
+          td
+           |  {{ row.ddt | date: 'yyyy-MM-dd'}}
+          td
+           |  {{ row.dno }}
+          td
+           |  {{ row.dtp }}
+          td
+           .pull-right
+             |  {{ row.ddr | number: 2}}
+          td
+           .pull-right
+             |  {{ row.dcr | number: 2}}
+          td
+           .pull-right
+             |  {{ row.bal | number:2}}
+     tfoot
+       tr
+         td.text-cente(colspan="5")
+           div(st-pagination="",st-items-by-page="itemsByPage",st-displayed-pages="5")

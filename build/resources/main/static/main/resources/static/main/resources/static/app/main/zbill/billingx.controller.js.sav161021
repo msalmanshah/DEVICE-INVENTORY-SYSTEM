@@ -1,0 +1,161 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('k7')
+    .controller('BillingxController', BillingxController);
+
+   /** @ngInject */
+  function BillingxController($http, $stateParams, $timeout, $log) {
+    var vm = this;
+
+    vm.dbg = false;
+
+    vm.pdr = $stateParams.pdr;
+
+    vm.abc = 'abc';
+/*
+      vm.dta = [{
+      "pdr": "1609",
+      "sta": "0",
+      "grp": "1",
+      "pds": "2016-09-01 00:00:00",
+      "xdt": "2016-09-13 15:12:49",
+      "due": null
+    }];
+*/
+
+    vm.form = {};
+
+    $http.get("/api/billingshow/"+vm.pdr)
+    .then(function(response) {
+      vm.dta = response.data;
+      $log.log("Value direct from database for msgimg: " + vm.dta[0].msgi);
+      vm.image = vm.getBase64Image(vm.dta[0].msgi);
+      $log.log("Value after convert msgimg using atob(): " + vm.image);
+      vm.b64es = decodeURIComponent("202.171.45.196:18080/api/dimg/"+vm.pdr+"/"+vm.dta[0].msgi);      
+      vm.form.pdr = vm.dta[0].pdr;
+      vm.form.msg = vm.dta[0].msgt;
+    });
+ 
+    vm.getBase64Image = function(bstr){
+       return bstr.replace(/^data:image\/(png|jpeg);base64,/,"");
+    }
+
+    vm.sub = function() {
+      if(vm.dta[0].msgt == null) {
+        $http.post("/api/inmsg", vm.form)
+        .then(
+        function(){
+          alert("Insert Successful");
+        }, function() {
+          alert("ERROR");
+        })
+        .then(function(){
+          $timeout(function(){
+            angular.element('#btnclose').triggerHandler('click');
+          });
+        });
+      }
+      else{
+        $http.post("/api/mvmsg", vm.form)
+        .then(
+        function() {
+          alert("Update Successful");
+        }, function() {
+          alert("ERROR");
+        })
+        .then (function(){
+          $timeout(function(){
+            angular.element('#btnclose').triggerHandler('click');
+          });
+        });
+      }
+    }
+ 
+    vm.values = {};
+
+    vm.usePmsg = function() {
+      
+      $http.get("/api/getPmsg/"+vm.pdr)
+      .then(function(resp) {
+        vm.msgd = resp.data;
+        vm.values.pdrno = vm.pdr;
+        vm.values.prevm = vm.msgd[0].msgtext;
+      });
+      if(vm.msgd[0].msgtext == null){
+        alert("Empty message!");
+      }
+      else{
+        vm.inpmsg(vm.values);
+      }
+
+
+/*      $http.post("/api/inmsg", vm.form)
+      .then(
+      function() {
+        alert("Insert from previous message SUCCESSFUL");
+      }, function() {
+        alert("ERROR");
+      });
+*/    }
+
+    vm.inpmsg = function(obj){
+      $http.post("/api/inprevmsg", obj)
+      .then(
+      function() {
+        alert("Insert from previous message SUCCESSFUL");
+      }, function() {
+        alert("ERROR");
+      });
+    }
+    
+   // vm.tryimg = 'data:image/(png|jpeg);base64,' + vm.dta[0].msgi;
+
+    vm.uimg = {};
+
+    vm.addimg = function(){
+      $log.log("I am in addimg() function");
+      var files = angular.element('#inp');
+      alert(files[0]);
+      var encodedString = btoa(files[0]);
+      if(encodedString.length > 0) {
+        vm.uimg.img = encodedString;
+        vm.uimg.pdr = vm.pdr;
+        $log.log(vm.uimg.img);
+        vm.upimg(vm.uimg);
+      }
+      
+    }
+
+    
+
+    vm.upimg = function(obj) {
+      $log.log("I am in upimg() function");
+      $http.post("/api/inimg", obj)
+      .then(
+      function(){
+        $log.log("I have done posting to Abc.groovy");
+        alert("Upload Success!");
+      }, function() {
+        alert("Error Upload!");
+      });
+    }
+    
+    vm.el = function(id){
+      return angular.element(id);
+    }
+
+    vm.rf = function(){
+      if(vm.files && vm.files[0]){
+        var FR = new FileReader();
+        FR.onload = function(e){
+          $log.log(e.targetResult);
+        };
+        FR.readAsDataURL(vm.files[0]);
+      }
+    }
+
+                                               
+  }
+})();

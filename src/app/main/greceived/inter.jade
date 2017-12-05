@@ -1,0 +1,12 @@
+form.form-inline
+  .form-group.col-md-6
+    statinfo
+      strong
+        label
+          small.text-info DELIVERY NO :
+        input.form-control(type="text", ng-model="deli.nos")
+  .form-group.col-md-6
+    button.btn.btn-md.btn-success(ng-click="deli.conf(deli.nos)") SUBMIT 
+br
+<hr>
+div(ui-view="show")

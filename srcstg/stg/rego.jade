@@ -1,0 +1,26 @@
+container
+  include unv/navx.jade
+  .container
+    .col-md-6
+      section#content
+        form
+          h5.small.text-muted PERMOHONAN AKSES KE KHAIRAT PKKF2
+          .form-group
+            input#username.form-control(type='text', placeholder='No KP', required='')
+          .form-group
+            input#username.form-control(type='text', placeholder='No Ahli', required='')
+          .form-group
+            input#username.form-control(type='text', placeholder='Emel', required='')
+          .form-group
+            input#password.form-control(type='password', placeholder='Katalaluan', required='')
+          .form-group
+            input#username.form-control(type='password2', placeholder='Sahkan Katalaluan', required='')
+          br
+          .col-md-6
+            .col-md-6 
+              a.btn.btn.btn-info(href="#")
+                | Daftar
+            .col-md-6
+              a.btn.btn.btn-default(href="#login")
+                | Batal
+            

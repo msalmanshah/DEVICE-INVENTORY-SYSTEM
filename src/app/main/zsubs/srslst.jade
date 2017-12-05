@@ -1,0 +1,24 @@
+
+table.table.table-striped.table-condensed.top-30(st-table,st-safe-src="subs.dta")
+  thead
+    tr.text-muted
+      th
+        | {{subs.dta.hd.one}}
+      th
+        | {{subs.dta.hd.two}}
+      th
+        | {{subs.dta.hd.tre}}
+  tbody
+    tr(ng-repeat="row in subs.dta.rs" ng-click="subs.clicksub(row.ky)")
+      th
+        | {{row.one}}  
+      td
+        | {{row.two}}
+        //a.text-info(ui-sref="home.showasub({sn: row.two})") {{row.two}}
+      td
+        | {{row.tre}}
+  tfoot
+    tr
+      td.text-cente(colspan="5")
+        div(st-pagination="",st-items-by-page="itemsByPage",st-displayed-pages="5")
+        

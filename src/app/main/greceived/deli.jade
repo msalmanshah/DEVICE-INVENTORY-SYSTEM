@@ -1,0 +1,27 @@
+include ../navs/unav.jade
+.panel.with-nav-tabs.panel-defd
+          .panel-heading.clearfix
+            .pull-left
+              h6.panel-title.top5
+                strong.text-muted
+                  | &nbsp&nbspDELIVERY ORDER&nbsp{{leav.selectedid}}
+            .pull-right
+              ul.nav.nav-tabs
+                li(ui-sref-active="active")
+                  a(ui-sref="eleave.pers({aeid: leav.selectedid})")
+                    small
+                      strong GOODS RECEIVED NOTES
+          .panel-body
+            form
+              .form-group.col-md-12
+                statinfo
+                  label
+                    strong
+                      small.text-info DELIVERY TYPE&nbsp&nbsp&nbsp
+                  input(type="radio", name="type",ng-model="deli.value", value="External",ng-change="deli.change(deli.value)", checked) 
+                  | External&nbsp
+                  input(type="radio", name="type",ng-model="deli.value", value="Internal", ng-change="deli.change(deli.value)") 
+                  | Internal
+            <hr>
+            br
+            div(ui-view="deltab")

@@ -1,0 +1,22 @@
+.col-md-8
+  .panel.with-nav-tabs.panel-default
+    .panel-heading.clearfix
+      .pull-left
+        //
+          <h1 class="panel-title top10"><small><strong>&nbsp&nbspAHLI&nbsp&nbsp&nbsp</strong></small>011 AHMAD</h1>
+        h6.panel-title.top10
+          strong.text-muted
+            | &nbsp&nbspSNO&nbsp{{main.selectedsno}}
+      .pull-right
+        ul.nav.nav-tabs
+          li.active
+            a(href='#t2p1', data-toggle='tab')
+              small
+                strong PROFILE      
+    .panel-body
+      .row
+        .col-md-12
+          div(ui-view)
+      .row
+        .tab-content
+          include unv/t2p1.jade

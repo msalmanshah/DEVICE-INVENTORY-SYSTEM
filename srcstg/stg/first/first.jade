@@ -1,0 +1,17 @@
+table.table.table-striped.table-condensed.top-30(st-table,st-safe-src="first.subsget")
+  thead
+    tr.text-muted
+      th
+        | {{main.subsget.hd.one}}
+      th
+        | {{main.subsget.hd.two}}
+      th
+        | {{main.subsget.hd.tre}}
+  tbody
+    tr(ng-repeat="row in first.subsget.rs")
+      td
+        | {{row.one}}
+      th
+        a(ui-sref="first.sublist.show({sn: {{row.two}} }") {{row.two}}
+      td
+        | {{row.tre}}

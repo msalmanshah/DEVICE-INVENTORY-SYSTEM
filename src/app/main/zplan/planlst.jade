@@ -1,0 +1,22 @@
+
+table.table.table-striped.table-condensed.top-30(st-table,st-safe-src="plan.dta")
+  thead
+    tr.text-muted
+      th
+        | {{ plan.dta.hd.one }}
+      th
+        | {{ plan.dta.hd.two }}
+      th
+        | {{ plan.dta.hd.tre }}
+  tbody
+    tr(ng-repeat="row in plan.dta.rs" ng-click="plan.clicksub(row.one)")
+      td
+        | {{ row.one }}
+      td
+        | {{ row.two }}
+      td
+        | {{ row.tre }}
+  tfoot
+    tr
+      td.text-center(colspan="5")
+        div(st-pagination="",st-items-by-pages="itemsByPage",st-displayed-pages="5")

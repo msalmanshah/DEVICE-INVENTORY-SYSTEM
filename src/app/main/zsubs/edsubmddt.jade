@@ -1,0 +1,10 @@
+div(ng-controller="PstController as pc")
+  form#2(role="form")
+       .form-group.col-md-12
+         statinfo
+           label
+             strong
+               small.text-info EMAIL
+           input.form-control(type="text", ng-model="pc.form.email")
+       button.btn.btn-info(ng-click="pc.save()") Save
+

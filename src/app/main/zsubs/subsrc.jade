@@ -1,0 +1,32 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li.active
+          a
+            small
+              strong favorhealth
+        li
+          a
+            small
+              strong Platform
+  .panel-body
+    .row
+      .col-md-12
+        include srcres.jade
+  .panel-footer
+    .row
+      .col-md-12
+        div(ng-if="subs.dbg")
+          p
+          | info={{subs.info}}
+
+      //
+        p
+          | {{main.log}}
+        p
+          | {{main.ppdta}}

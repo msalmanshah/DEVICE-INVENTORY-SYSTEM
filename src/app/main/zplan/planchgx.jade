@@ -1,0 +1,10 @@
+.row
+  .col-md-9
+    .list-group
+      a.list-group-item.active
+        h5.list-group-item-heading CHARGES
+      a.list-group-item
+        h5.list-group-item-heading {{ planx.data[0].cgc }} &nbsp;-&nbsp; {{ planx.data[0].des }}
+        h6.list-group-item-text {{ planx.data[0].ctp  | StatX }} &nbsp; {{ planx.data[0].chg | currency }}
+  .col-md-3
+    | &nbsp&nbsp&nbsp

@@ -1,0 +1,16 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbspPERIOD REF: {{ billing.selectedpdr }}&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li(ui-sref-active="active")
+          a(ui-sref="bill.pdr({pdr: billing.selectedpdr})")
+            small
+              strong PERIOD
+  .panel-body
+    .row
+      .col-md-12
+        div(ui-view="tabpage")

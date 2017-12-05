@@ -1,0 +1,27 @@
+form.form-inline(name="doc")
+  .form-group.col-md-6
+    statinfo
+      strong
+        label
+          small.text-info FROM :&nbsp
+        input.form-control(type="text",name="don", ng-model="exte.cloc", required="true")
+        .help-block(ng-messages="doc.don.$error", ng-if="doc.don.$touched")
+          p(ng-message="required", style="color: red;") From location is required.
+  .form-group.col-md-6
+    statinfo
+      strong
+        label
+          small.text-info WHERE TO :&nbsp
+        input.form-control(type="text",name="ven", ng-model="exte.rloc", required="true")   
+        .help-block(ng-messages="doc.ven.$error", ng-if="doc.ven.$touched")
+          p(ng-message="required", style="color: red;") Destination is required.
+        br
+  br
+  br
+  .form-group.col-md-12
+    button.btn.btn-success.btn-md(type="submit", value="Submit1", ng-click="exte.get(exte.cloc,exte.rloc)", ng-disabled="doc.$invalid", ng-class="{disabled: doc.$invalid}") Submit
+  br
+  br
+<hr>
+br
+div(ui-view="input")

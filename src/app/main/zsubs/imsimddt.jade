@@ -1,0 +1,34 @@
+div(ng-controller="PstController as pc")
+  table.table.table-condensed
+    thead
+      tr
+        th Device {{dta.zacc}}
+        th Serial
+        th Effective Date
+        th Status
+    tbody
+      tr(ng-repeat="dta in pc.fta" ng-click="pc.expand(dta.sta,dta.ser,dta.typ)")
+        td {{ dta.typ }}
+        td {{ dta.ser }}
+        td {{ dta.sef | date:'yyyy-MM-dd'}}
+        td {{ dta.sta | StatF }}
+  div(ng-hide="!pc.shown")
+   .row
+     .col-md-1
+     .col-md-5
+       statinfo
+        strong 
+          medium.text-info DEVICE SELECTED: &nbsp;&nbsp;
+       | {{pc.typ}} &nbsp;&nbsp; {{pc.ser}}
+     .col-md-6
+       button.btn.btn-sm.btn-primary(ng-if="pc.sta" ng-click="pc.activate(pc.ser)" data-dismiss="modal") Activate
+       button.btn.btn-sm.btn-primary(ng-if="!pc.sta" ng-click="pc.deactivate(pc.ser)" data-dismiss="modal") Deactivate
+       button.btn.btn-sm.btn-primary(ng-click="pc.upClic()") Update Firmware
+       button.btn.btn-sm.btn-primary(ng-click="pc.doClic()") Download Logs and Statistics
+   .row
+     .col-md-12
+       statinfo
+         strong
+           medium.text-success(ng-show="pc.show1") Firmware Successfully Updated.
+           br
+           medium.text-success(ng-show="pc.show2") Log and Statistic Downloaded.

@@ -1,0 +1,14 @@
+#emlmodal.modal.fade(tabindex="-1", role="dialog", aria-labelledby="emlmodallabel", aria-hidden="true")
+  .modal-dialog.modal-md
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4#mvmodallabel.modal-title.text-primary
+          strong
+            | E-Mail
+      .modal-body
+        include emlmddt.jade
+      .modal-footer
+        #btnclose.button.btn.btn-default(data-dismiss="modal") Close

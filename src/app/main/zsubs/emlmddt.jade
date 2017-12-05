@@ -1,0 +1,8 @@
+div(ng-controller="BillController as bc")
+  form#f1(role="form")
+    .form-group
+      statinfo
+        label
+          strong
+        input.form-control(type="text", ng-model="bc.form.edeml")
+    button.btn.btn-info(ng-click="bc.seml()") Send E-Mail

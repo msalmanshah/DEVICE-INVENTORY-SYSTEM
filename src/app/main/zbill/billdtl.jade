@@ -1,0 +1,19 @@
+//billdtl
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li(ui-sref-active="active")
+          a(ui-sref="billdtl({sn: main.selectedsno})")
+            small
+              strong PREPAID
+  .panel-body
+    .row
+      .col-md-12
+        //div(ui-view="billdtlpg")
+        p
+          | Bill period details

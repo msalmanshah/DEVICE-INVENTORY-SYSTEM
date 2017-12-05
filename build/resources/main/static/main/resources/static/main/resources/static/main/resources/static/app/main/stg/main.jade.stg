@@ -1,0 +1,9 @@
+container
+  include unv/unav.jade
+  .container
+    .row
+      .col-md-5
+        include usearcht.jade
+      .col-md-7
+        include uprofilt.jade 
+    

@@ -1,0 +1,63 @@
+.row
+  .col-md-8
+    select.form-control.selectpicker(ng-init="billc.sel='bill'", ng-model="billc.sel", ng-change="billc.chg()")
+      option(value='bill') Bill
+      option(value='unbill') Unbilled
+  .col-md-4
+    button.btn.btn-block.btn-default.btn-sm
+      | Interim Bill
+
+br
+
+.row(ng-if="billc.cstb")
+  .col-md-12
+    div
+      ul.list-group
+        li.list-group-item.active
+          h5.list-group-item-heading BILLS
+        li.list-group-item(ng-repeat="lst in billc.dta")
+          .row
+            .col-md-6
+              h5.list-group-item-heading {{lst.dno}}
+              h6.list-group-item-heading {{lst.ddt | date: 'yyyy-MM-dd'}} &nbsp; {{lst.pdr}} &nbsp; {{lst.amt | number: 2}} 
+            .col-md-2
+              a.list-group-item-text(target="_blank" ng-href="/pdf/billx/{{billc.port}}/{{lst.acc}}/{{lst.pdr}}")
+                h6.text-danger
+                | PDF      
+            .col-md-2
+              a.list-group-item-text(ng-href="/pdf/bill/csv/{{lst.acc}}/{{lst.pdr}}")
+                h6.text-danger
+                | CSV
+            .col-md-2
+              a.list-group-item-text(data-toggle="modal", data-target="#emlmodal", ng-click="billc.edta(lst.acc, lst.pdr)")
+                h6.text-danger
+                | E-MAIL
+.row(ng-if="billc.cstu")
+  .col-md-12
+    table.table.table-striped.table-condensed.top30(st-table, st-safe-src="billc.bdta")
+      thead
+        tr.text-muted
+          th
+            | Date
+          th
+            | Class
+          th
+            | To
+          th
+            | Charge
+      tbody 
+        tr(ng-repeat="row in billc.bdta")
+          td
+            | {{ row.sdt | date: 'yyyy-MM-dd'  }}
+          td
+            | {{ row.kls  }}
+          td
+            | {{ row.bno }}
+          td
+            | {{ row.cg0 }}
+      tfoot 
+        tr
+          td
+            | &nbsp&nbsp&nbsp
+
+include emlmd.jade

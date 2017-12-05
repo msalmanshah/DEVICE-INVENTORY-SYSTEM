@@ -1,0 +1,55 @@
+(function() {
+  'use strict';
+
+  angular
+    .module('k7')
+    .controller('PstBillController', PstBillController)
+    ;
+
+  /** @ngInject */
+  function PstBillController($log,$http,$stateParams) {
+
+    var vm = this;
+    
+    vm.dbg = false;
+    vm.sno = $stateParams.sn
+    vm.abc = 'abc'
+    vm.dta =[{"ac":"A103","sn":"0101111187","si":"502151123456894","st":1,"nm":"PAUL CITIZEN","ad":null}];
+
+    vm.cstb = true;
+    vm.cstu = false;
+
+    $log.log("vm.cstb: " + vm.cstb + "vm.cstu: " + vm.cstu);
+ 
+    vm.chg = function(){
+      $log.log("vm.cstb: " + vm.cstb + "vm.cstu: " + vm.cstu);
+      if(vm.sel == "bill"){
+        vm.cstb = true;
+        vm.cstu = false;
+        $http.get("/api/bills/"+vm.sno)
+        .then(function(response) { 
+          vm.dta = response.data;
+        });
+      } else{
+        vm.cstb = false;
+        vm.cstu = true;
+        $http.get("/api/ubills/"+vm.sno)
+        .then(function(resp){
+          vm.bdta = resp.data
+        });
+      }
+    }
+/*
+    $http.get("/api/bills/"+vm.sno)
+    .then(function(response) {
+      vm.dta = response.data;
+    });
+*/
+    $http.get("/api/ubills/"+vm.sno)
+    .then(function(resp){
+      vm.bdta = resp.data
+    });
+
+    //vm.info = vm.dta;  
+  }
+})();

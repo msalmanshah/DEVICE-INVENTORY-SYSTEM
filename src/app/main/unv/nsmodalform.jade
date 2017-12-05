@@ -1,0 +1,43 @@
+div(ng-controller="NewsubController as nsc")
+  form(role="form")
+    .form-group
+      label.radio-inline 
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="per" ng-model="nsc.rtp" checked=""> Personal Registration
+      label.checkbox-inline 
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="coy" ng-model="nsc.rtp"> Company Registration
+    .form-group(ng-show="nsc.rtp == 'per'")
+      statinfo
+        label 
+          strong
+            small.text-info NATIONALITY
+      select.form-control(ng-model="nsc.nat")
+        option(ng-repeat="opt in nsc.ccodes", value="{{opt.id}}") {{opt.name}}    
+    .form-group(ng-show="nsc.rtp == 'coy'")
+      statinfo
+        label 
+          strong
+            small.text-info COMPANY REGISTRATION
+        input.form-control(id='i1',type='text', ng-model="nsc.idn", placeholder="Company Registration No", onblur="this.value=this.value.toUpperCase()")
+    .form-group(ng-show="nsc.rtp == 'per'")
+      statinfo
+        label 
+          strong
+            small.text-info {{nsc.nat == "MYS" ? "IC NO" : "PASSPORT NO"}}
+        input.form-control(id='i1',type='text', ng-model="nsc.idn", onblur="this.value=this.value.toUpperCase()")
+    .form-group
+      statinfo
+        label 
+          strong
+            small.text-info {{nsc.rtp=='per'?'':'COMPANY'}} NAME
+        input.form-control(id='i1',type='text', ng-model="nsc.nme", onblur="this.value=this.value.toUpperCase()")
+    .form-group
+      statinfo
+        label 
+          strong
+            small.text-info SUBSCRIBER
+        input.form-control(id='i1',type='text', ng-model="nsc.sub", placeholder="Subscriber's Name", onblur="this.value=this.value.toUpperCase()")
+    button.btn.btn-info(type="submit") Save
+    <hr>
+    p
+      |{{nsc.nme}}
+    

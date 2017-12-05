@@ -1,0 +1,43 @@
+div(ng-controller="MovePpdController as mv")
+  form#f1(role="form")
+    .form-group.form-inline
+      statinfo
+        label 
+          strong
+            small.text-info SNO &nbsp;&nbsp;
+        input.form-control(id='i01',type='text', ng-model="mv.form.sno", placeholder="Service No")
+        button.btn.btn-info(ng-click="mv.getppd()") Find
+  form#f2(role="form")
+    .form-group
+      statinfo
+        label 
+          strong
+            small.text-info SUBSCRIBER
+        input.form-control(id='i11',type='text', ng-model="mv.form.sub", placeholder="Subscriber's Name", ng-blur="this.value=this.value.toUpperCase()")
+    .form-group
+      statinfo
+        label 
+          strong
+            small.text-info PREPAID ACCOUNT NO
+        input.form-control(id='i12',type='text', ng-model="mv.form.rf1", onblur="this.value=this.value.toUpperCase()")
+    .form-group(ng-show="mv.rtp == 'per'")
+      statinfo
+        label 
+          strong
+            small.text-info IDENTIFICATION DOCUMENT
+        input.form-control(id='i13',type='text', ng-model="mv.form.idn", placeholder="IC | Passport | Registration No", onblur="this.value=this.value.toUpperCase()")
+    .form-group
+      statinfo
+        label 
+          strong
+            small.text-info POSTPAID ACCOUNT NAME
+        input.form-control(id='i14',type='text', ng-model="mv.form.acn", onblur="this.value=this.value.toUpperCase()")
+    .form-group
+      statinfo
+        label 
+          strong
+            small.text-info PLAN SUBSCRIBED
+      select.form-control(ng-model="mv.form.pln")
+        option(ng-repeat="opt in mv.plnlst", value="{{opt.id}}") {{opt.name}}
+    button.btn.btn-info(ng-click="mv.mvsub()") Create Account
+    

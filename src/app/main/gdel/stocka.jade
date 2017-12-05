@@ -1,0 +1,71 @@
+.row.justify-content-between.col-md-5
+ .panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top5
+        strong.text-info
+          | &nbsp&nbspITEM AT&nbsp{{exte.cloc}}
+  .panel-body
+    table.table.table-striped.table-hover(st-table="exte.display", st-safe-src="exte.showall")
+       thead
+         tr
+           th(st-sort="scd")
+             medium.text-info Stock ID
+           th(st-sort="qtys")
+             medium.text-info Quantity Available
+           th
+             medium.text-info Details
+           th
+             medium.text-info Quantity Transfer
+           tr
+             th
+               input.input-sm.form-control(st-search="scd", placeholder="Find Stock ID.", type="search")
+       tbody
+         tr(ng-repeat="x in  exte.display track by $index")
+           td
+             | {{x.scd}}
+           td
+             | {{x.qtys}}
+           td
+             button.btn.btn-sm.btn-info(data-toggle="modal", data-target="#exView", ng-click="exte.ini(x.scd,x.qtys)", ng-if ="x.sta") Item Details
+             button.btn.btn-sm.btn-info(data-toggle="modal", data-target="#exUpd", ng-click="exte.ini(x.scd,x.qtys)", ng-if = "!x.sta") Change
+           td 
+             | {{x.qtyt}}
+       tfoot
+         tr
+           td.text-center(colspan="12")
+             div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")
+
+.col-md-7
+  .panel.with-nav-tabs.panel-defd
+   .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top5
+        strong.text-info
+          | &nbsp&nbspITEM TRANSFER
+   .panel-body
+    table.table.table-striped.table-float(st-table="exte.display2",st-safe-src="exte.alltrans")
+     thead
+       tr
+         th(st-sort="scd")
+           medium.text-info Stock ID
+         th(st-sort="sno")
+           medium.text-info Serial No
+     tbody
+       tr(ng-repeat="x in exte.display2")
+         td
+           | {{x.scd}}
+         td
+           | {{x.sno}}
+     tfoot
+       tr
+         td.text-center(colspan="12")
+           div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")  
+    br
+    medium.text-info TOTAL QUANTITY :&nbsp{{exte.alltrans.length}}
+    br
+    button.btn.btn-md.btn-info(ng-disabled="exte.alltrans.length == 0", ng-click="exte.getdn()", style="float: center;", ng-if="exte.done") DELIVER
+    button.btn.btn-md.btn-info(data-toggle="modal", data-target="#exRec", ng-if = "!exte.done") STATEMENT
+include exView.jade
+include exRec.jade
+include exUpd.jade

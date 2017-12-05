@@ -1,0 +1,9 @@
+div(ng-controller="BillingxController as mc")
+  form#f2(role="form")
+    .form-group
+       statinfo
+         label
+           strong
+             small.text-info MESSAGE
+         textarea.form-control(rows='5', ng-model="mc.form.msg")
+    button.btn.btn-info(ng-click="mc.sub()") Save Message

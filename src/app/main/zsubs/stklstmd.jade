@@ -1,0 +1,15 @@
+#stklst.modal.fade(tabindex="-1", role="dialog", aria-labelledby="dtmodallabel", aria-hidden="true")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4#dtmodallabel.modal-title.text-primary
+          strong
+            | Stakeholder Register
+      .modal-body
+        include stklstdtl.jade
+        button.btn.btn-danger.btn-sm Add Stakeholders
+      .modal-footer
+        #btnclose.button.btn.btn-default(data-dismiss="modal") Close

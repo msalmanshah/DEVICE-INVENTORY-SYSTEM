@@ -1,0 +1,48 @@
+#adDev.modal.fade(style="max-height: calc(100vh - 110px);overflow-y: auto;", ng-controller="PstController as pc")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Add Device
+      .modal-body
+        .row
+          .col-md-8
+            select#loc.form-control(ng-model="pc.loct")
+              option(value="", selected required hidden) Store Location
+              option(ng-repeat="x in pc.loca", value="{{x.loc}}") {{x.loc}}
+          .col-md-4
+            button.btn.btn-sm.btn-info(ng-click="pc.show(pc.loct)") Confirm 
+        hr
+        .row
+          .col-md-12
+            p(ng-show="pc.stoc == 'null' || pc.stoc == 'undefined' || pc.stoc.length == 0")
+              | No Stock Available at This Location
+            table.table.table-striped.table-hover(st-table="pc.disp", st-safe-src="pc.stoc")
+              thead
+                tr
+                  th(st-sort="scd")
+                    small.text-info Stock ID
+                  th(st-sort="sno")
+                    small.text-info Serial NO
+                  th(st-sort="sta")
+                    small.text-info Status
+              tbody
+                tr(ng-repeat="x in pc.disp track by $index")
+                  td
+                    | {{x.scd}}
+                  td
+                    | {{x.sno}}
+                  td
+                    | {{x.sta}}
+                  td
+                    button.btn.btn-sm.btn-success(data-dismiss="modal", data-toggle="modal", data-trigger="#imsi", ng-click="pc.adDev(x.scd,x.sno)") Add
+              tfoot
+                tr
+                  td.text-center(colspan="12")
+                    div(st-pagination="", st-items-by-page="5", st-displayed-pages="7")
+      .modal-footer
+        button.btn.btn-default.btn-sm(data-dismiss="modal", style="float: right;") Close

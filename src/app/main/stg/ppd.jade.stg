@@ -1,0 +1,7 @@
+.row
+  .col-md-12
+    div(ui-view)
+    h6
+      | PREPAID.
+    h6
+      | eee

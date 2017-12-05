@@ -1,0 +1,134 @@
+.row(ng-if="pst.dbg")
+  p In sub.pst.x state, pstsub.jade
+.row
+  .col-md-6
+    p &nbsp;
+  .col-md-3
+  //
+    button.btn.btn-danger.btn-sm.pull-right(data-toggle="modal", data-target="#newreg"")
+      | Add Another Sub.
+      //span.glyphicon.glyphicon-edit(aria-hidden='true')
+  .col-md-3
+    button.btn.btn-danger.btn-sm.pull-right(data-toggle="modal", data-target="#newreg")
+      | New Registrations
+  //
+    button.btn.btn-default.btn-sm.pull-right(type='submit', ng-click="pst.rtnppd()")
+      | Return to Prepaid.
+<hr>
+.row(ng-if="pst.dbg")
+  p
+    | info={{pst.info}}
+  p
+    | log={{pst.log}}
+  p
+    | dta={{pst.dta}}
+.row
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot PATIENT ID
+      br
+      | {{pst.dta[0].sno}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot STATUS
+      br
+      | {{pst.dta[0].sta | StatF}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot PLAN SUBSCRIBED
+      br
+      | {{pst.dta[0].plndes }}
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot DEVICE ID
+      br
+      | {{pst.dta[0].sim}}
+.row
+  .col-md-6
+    statinfo
+      strong
+        small.text-favoriot PATIENT
+      br
+      | {{pst.dta[0].nme}}
+  .col-md-3
+    button.btn.btn-default.btn-sm(data-toggle="modal", data-target="#chgpln") Change Plan
+  .col-md-3
+    button.btn.btn-default.btn-sm(data-toggle="modal", data-target="#imsi") Device Register
+<hr>
+.row
+  .col-md-3 
+    statinfo
+      strong
+        small.text-favoriot ACCOUNT NO
+      br
+      | {{pst.dta[0].acc}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot ACCOUNT STATUS
+      br
+      | {{pst.dta[0].acs | StatF}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot ID DOC
+      br
+      | {{pst.dta[0].idn}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-favoriot EMAIL
+      br
+      | {{pst.dta[0].eml}}
+.row
+  .col-md-9
+    statinfo
+      strong
+        small.text-favoriot ACCOUNT
+      br
+      | {{pst.dta[0].acn}}
+  .col-md-3
+    button.btn.btn-default.btn-sm(data-toggle="modal", data-target="#edsub") Edit
+.row(style='text-transform: uppercase')
+  .col-md-9
+    statinfo
+      strong
+        small.text-favoriot ADDRESS
+      br
+      | {{pst.dta[0].adr}}
+      br
+      | {{pst.dta[0].ad2}}
+      br
+      | {{pst.dta[0].ad3}}
+      br
+      | {{pst.dta[0].zip}}
+      br
+      | {{pst.dta[0].ads}}
+  .col-md-3
+    button.btn.btn-danger.btn-sm(data-toggle="modal", data-target="#stklst") Stakeholders
+<hr>
+.row
+  .col-md-4
+    statinfo
+      strong
+        small.text-favoriot OUTSTANDING BALANCE
+      br
+      | {{pst.dta[0].ost | number:2}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-favoriot LAST PAYMENT RECEIVED
+      br
+      | {{pst.dta[0].recamt}} &nbsp; {{pst.dta[0].recdt}}
+.row
+  .col-md-12
+    include psttabs.jade
+
+include edsubmd.jade
+include imsimd.jade
+include stklstmd.jade
+include newreg.jade

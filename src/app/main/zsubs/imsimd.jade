@@ -1,0 +1,18 @@
+#imsi.modal.fade(tabindex="-1", role="dialog", aria-labelledby="dtmodallabel", aria-hidden="true")
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4#dtmodallabel.modal-title.text-primary
+          strong
+            | Device Register&nbsp&nbsp
+          button.btn.btn-sm.btn-primary(data-dismiss="modal", data-toggle="modal", data-target="#adDev") Add Device
+      .modal-body
+        include imsimddt.jade
+      .modal-footer
+       div(ng-controller="PstController as pc")
+        #btnclose.button.btn.btn-default(data-dismiss="modal", ng-click="pc.close()") Close
+
+include adDev.jade

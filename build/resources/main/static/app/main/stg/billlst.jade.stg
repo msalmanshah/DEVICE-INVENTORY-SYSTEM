@@ -1,0 +1,28 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li.active
+          a(href="#")
+            small
+              strong BILL PERIOD
+  .panel-body
+    .row
+      .col-md-12
+        include billpdl.jade
+  //
+    .panel-footer
+    .row
+      .col-md-12
+        p
+          | {{main.info}}
+
+      //
+        p
+          | {{main.log}}
+        p
+          | {{main.ppdta}}

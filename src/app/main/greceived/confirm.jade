@@ -1,0 +1,52 @@
+.row
+  .col-md-12
+     statinfo
+      strong
+         large.text-info DELIVERY NOTE
+      br
+      | {{exte.ggdel[0].gdn}}
+.row
+  .col-md-4
+    statinfo
+      strong
+         medium.text-info FROM:
+      br
+      | {{exte.ggdel[0].frm}}
+  .col-md-4
+    statinfo
+      strong
+         medium.text-info DATE:
+      br
+      | {{exte.ggdel[0].gdt}}
+  .col-md-4
+    statinfo
+      strong
+         medium.text-info DESTINATION:
+      br
+      | {{exte.ggdel[0].des}}
+hr
+.row
+  .col-md-12
+    table.table.table-striped
+      tr
+        th Stock ID
+        th Serial NO
+      tr(ng-repeat="x in exte.show")
+        td {{x.scd}}
+        td {{x.sno}}
+hr
+.row
+  .col-md-4
+     statinfo
+       strong
+         small.text-info Update Location
+       select#op1.form-control(ng-model="exte.loct")
+         option(value="",selected required hidden) Pick Location
+         option(ng-repeat="x in exte.loca", value ="{{x.loc}}") {{x.loc}}
+hr
+.row
+  .col-md-12
+    button.btn.btn-md.btn-success(data-toggle="modal", data-target="#inRec" ng-click="exte.grec()") Confirm
+
+include inrec.jade
+

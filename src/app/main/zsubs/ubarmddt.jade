@@ -1,0 +1,9 @@
+div(ng-controller="CctlController as cc")
+  form#f3(role="form")
+    .form-group
+      statinfo
+        label
+          strong
+            small.text-info Comment
+        textarea.form-control(rows='4', ng-model="cc.form3.cmt")
+    button.btn.btn-info(ng-click="cc.ub1()") Unbarr                                                   

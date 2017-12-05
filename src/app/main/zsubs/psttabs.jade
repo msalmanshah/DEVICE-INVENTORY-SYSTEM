@@ -1,0 +1,53 @@
+.panel.with-nav-tabs.panel-defx
+  .panel-heading.clearfix
+    .pull-left 
+      h6.panel-title.subs10
+        strong.text-muted
+          | &nbsp&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li
+          a(ui-sref="subs.pst.x.bill")
+            small
+              strong BILLING
+        li
+          a(ui-sref="subs.pst.x.legr")
+            small
+              strong LEDGERS
+        li
+          a(ui-sref="subs.pst.x.cctl")
+            small
+              strong CREDIT CONTROL
+        li
+          a(ui-sref="subs.pst.x.logs")
+            small
+              strong LOGS
+  .panel-body
+    .row
+      .col-md-12
+        div(ui-view="subtabpage")
+
+
+//
+  .pull-right
+  ul.nav.nav-tabs
+    li.active
+      a(ui-sref="subs.pst.bill")
+        small
+          strong BILLING
+    li
+      a(ui-sref="subs.pst.cctl")
+        small
+          strong CREDIT CONTROL
+    li
+      a(ui-sref="subs.pst.logs")
+        small
+          strong LOGS
+  .row
+  .col-mid-12
+    div
+      h1 
+        | &nbsp
+    div(ui-view="subtabpage")
+
+

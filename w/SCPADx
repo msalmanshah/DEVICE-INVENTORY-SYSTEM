@@ -1,0 +1,769 @@
+SCPAD
+/////
+
+
+105003030
+105003303
+105005303
+105040303
+107700303
+107980303
+1135544303
+105099000
+105221123
+107770667
+108127606
+108137606
+122027606
+107777777
+108008383
+130000002
+105002002
+
+(
+'0105003030',
+'0105003303',
+'0105005303',
+'0105040303',
+'0107700303',
+'0107980303',
+'01135544303',
+'0105099000',
+'0105221123',
+'0107770667',
+'0108127606',
+'0108137606',
+'0122027606',
+'0107777777',
+'0108008383',
+'0130000002',
+'0105002002'
+)
+
+  //def db = [url:'jdbc:mysql://localhost:3306/k7', user:'root', password:'', driver:'com.mysql.jdbc.Driver']
+  def db = [url:'jdbc:mysql://localhost:3306/unv', user:'root', password:'', driver:'com.mysql.jdbc.Driver']
+  def sql = Sql.newInstance(db.url, db.user, db.password, db.driver)
+
+  @RequestMapping(value="/bill/{acc}/{pd}")
+  ResponseEntity<InputStreamResource> doBill(@PathVariable acc, @PathVariable pd)
+          throws IOException {
+
+      def t = "./mkpdf.pl ${acc} ${pd}".execute()
+      sleep (500)
+
+    //URL jarUrl = new File("./").toURI().toURL();
+    //URLClassLoader jarLoader = new URLClassLoader(new URL[]{jarUrl}, Thread.currentThread().getContextClassLoader());
+    //ClassPathResource sampleResource = new ClassPathResource("PDFS/su${acc}${pd}.pdf",jarLoader);
+
+      ClassPathResource pdfFile = new ClassPathResource("su${acc}${pd}.pdf");
+
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+      headers.add("Pragma", "no-cache");
+      headers.add("Expires", "0");
+      
+      return ResponseEntity
+              .ok()
+              .headers(headers)
+              .contentLength(pdfFile.contentLength())
+              .contentType(MediaType.parseMediaType("application/pdf"))
+              .body(new InputStreamResource(pdfFile.getInputStream()));
+  }
+
+  @RequestMapping(value = "/pdfbill/{fn}", method = RequestMethod.GET, produces = "application/pdf")
+  public ResponseEntity<InputStreamResource> doDFFile(@PathVariable fn)
+          throws IOException {
+
+      ClassPathResource pdfFile = new ClassPathResource("${fn}");
+
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+      headers.add("Pragma", "no-cache");
+      headers.add("Expires", "0");
+      
+      return ResponseEntity
+              .ok()
+              .headers(headers)
+              .contentLength(pdfFile.contentLength())
+              .contentType(MediaType.parseMediaType("application/pdf"))
+              .body(new InputStreamResource(pdfFile.getInputStream()));
+  }
+
+  @RequestMapping(value = "/bills/pdf", method = RequestMethod.GET, produces = "application/pdf")
+  public ResponseEntity<InputStreamResource> downloadPDFFile()
+          throws IOException {
+
+      ClassPathResource pdfFile = new ClassPathResource("test1234.pdf");
+
+      HttpHeaders headers = new HttpHeaders();
+      headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+      headers.add("Pragma", "no-cache");
+      headers.add("Expires", "0");
+      
+      return ResponseEntity
+              .ok()
+              .headers(headers)
+              .contentLength(pdfFile.contentLength())
+              .contentType(MediaType.parseMediaType("application/pdf"))
+              .body(new InputStreamResource(pdfFile.getInputStream()));
+  }
+
+
+LOCAL/ROAMING      HV
+
+LOCAL ONT/STD/IDD  NSI
+
+voice/sms/mms/data/premiumcontent     VSMPD
+
+(H|V)(N|S|I)(V|S|M|D|P)[<premium-code>]
+
+class Example { 
+   static void main(String[] args) { 
+      File file = new File("E:/Example.txt") 
+      println file.text 
+   } 
+}
+
+
+@RequestMapping(value="/getpdf", method=RequestMethod.POST)
+public ResponseEntity<byte[]> getPDF(@RequestBody String json) {
+    // convert JSON to Employee 
+    Employee emp = convertSomehow(json);
+
+    // generate the file
+    PdfUtil.showHelp(emp);
+
+    // retrieve contents of "C:/tmp/report.pdf" that were written in showHelp
+    byte[] contents = (...);
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.parseMediaType("application/pdf"));
+    String filename = "output.pdf";
+    headers.setContentDispositionFormData(filename, filename);
+    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+    ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(contents, headers, HttpStatus.OK);
+    return response;
+}
+
+ 
+@RequestMapping(value = "/pdfs/{fn}", method = RequestMethod.GET)
+HttpEntity<byte[]> createPdf(
+                 @PathVariable("fileName") String fileName) throws IOException {
+
+    File document = this.pdfFramework.createPdf(filename);
+
+    HttpHeaders header = new HttpHeaders();
+    header.setContentType(new MediaType("application", "pdf"));
+    header.set("Content-Disposition",
+                   "attachment; filename=" + fileName.replace(" ", "_"));
+    header.setContentLength(document.length());
+
+    return new HttpEntity<byte[]>(new FileSystemResource(document),
+                                  header);
+}
+
+
+ 
+@RequestMapping("/pdfs/{fn}")
+public HttpEntity<byte[]> createPdf(
+                 @PathVariable("fileName") String fileName) throws IOException {
+
+    File document = this.pdfFramework.createPdf(filename);
+
+    HttpHeaders header = new HttpHeaders();
+    header.setContentType(new MediaType("application", "pdf"));
+    header.set("Content-Disposition",
+                   "attachment; filename=" + fileName.replace(" ", "_"));
+    header.setContentLength(document.length());
+
+    return new HttpEntity<byte[]>(new FileSystemResource(document),
+                                  header);
+}
+
+
+
+  (did, bat, dno, ddt, dtp, dmd, pdr, ddr, dcr, acc, sub, rf1, rf2, rf3, nrr)
+
+  f0l, f0d
+  f0y
+  f0a
+  f1l
+  f1d
+  f1y
+  f1a
+  f2l
+  f2d
+  f2y
+  f2a
+  f3l
+  f3d
+  f3y
+  f3a
+  xdt
+  xby
+  xat
+
+
+insert into 
+adoc   
+(did, bat,  dno,          ddt,        dtp,  dmd,   pdr,  ddr,    dcr,   acc,  sub,         nrr,        xdt,xby,xat) 
+values 
+(null,null,'I16090000001','2016-07-01','INV','DOC','1607',189.000,0.000,'A103','0101111187','1607 Bills',now(),'Bgen','@'),
+(null,null,'I16090000002','2016-08-01','INV','DOC','1608',289.000,0.000,'A103','0101111187','1608 Bills',now(),'Bgen','@'),
+(null,null,'I16090000003','2016-09-01','INV','DOC','1609',389.000,0.000,'A103','0101111187','1609 Bills',now(),'Bgen','@');
+
+
+
+KB Shorts
+Sublime
+---------
+
+Column Selection        -- Opt + Mouse Select
+Word Selection          -- cursor on word, Ctrl+Cmd+G
+Whole LINES selection   -- Select lines, Cmd-Shft-L, edit. (Affects start and end of lines)
+
++-------+------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                     |
++-------+------------------------------------------------------------------------------------------------------------------+
+| z     | CREATE TABLE `z` (
+  `a` int(11) DEFAULT NULL,
+  `b` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++-------+------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.01 sec)
+
+mysql> select * from z;
++------+------+
+| a    | b    |
++------+------+
+|    1 |    2 |
+|    1 | NULL |
+| NULL | NULL |
++------+------+
+3 rows in set (0.00 sec)
+
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| zz    | CREATE TABLE `zz` (
+  `a` int(11) NOT NULL AUTO_INCREMENT,
+  `b` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`a`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 |
++-------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+mysql> select * from zz;
++---+-----------+
+| a | b         |
++---+-----------+
+| 1 | abc       |
+| 2 | 000000001 |
+| 3 | 000000002 |
+| 4 | 000000004 |
+| 5 | 000000005 |
+| 6 | 000000006 |
++---+-----------+
+6 rows in set (0.01 sec)
+
++-------+---------------------------------------------------------------------------------------------------------------------+
+| Table | Create Table                                                                                                        |
++-------+---------------------------------------------------------------------------------------------------------------------+
+| zzz   | CREATE TABLE `zzz` (
+  `a` int(11) DEFAULT NULL,
+  `d` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 |
++-------+---------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> select * from zzz;
++------+---------------------+
+| a    | d                   |
++------+---------------------+
+|    1 | 2016-08-31 23:59:59 |
+|    1 | 2016-09-07 19:19:38 |
++------+---------------------+
+2 rows in set (0.01 sec)
+
+
+
+FYI
+
+1) sub query
+http://203.82.85.195/~svc/cgi-bin/Billsubquery.cgi?phonenumber=0105002002
+
+
+2) barring
+http://203.82.85.195/~svc/cgi-bin/barr.cgi?txid=xxxxx&phonenumber=xxxxxxxx&stype=0
+
+
+3) unbarring
+http://203.82.85.195/~svc/cgi-bin/unbarr.cgi?txid=xxxxx&phonenumber=xxxxxx&stype=0
+
+
+4) subscriber switch
+http://203.82.85.195/~svc/cgi-bin/switch.cgi?txid=xxxx&phonenumber=xxxxx
+
+
+5) credit control alert
+http://203.82.85.195/~svc/cgi-bin/ccontrolmsg.cgi?txid=xxxxx&phonenumber=xxxxxx&param=xxxxxxxx
+
+unv biiling
+------------
+- java spring webserver on port 18089
+- perl heartbeat yo.pl to keep mysql connection alive
+- mysql on port 3306
+- si ftp transfer
+- si rating
+
+http://blog.thoughtram.io/angular/2015/07/07/service-vs-factory-once-and-for-all.html
+http://stackoverflow.com/questions/22408790/angularjs-passing-data-between-pages
+https://tylermcginnis.com/angularjs-factory-vs-service-vs-provider-5f426cfe6b8c#.2lxo1acnr
+
+The fall 
+is when
+racing to excel
+is suppressed,
+when on a different path
+is dissent,
+when ideas glow, 
+but shoved away,
+and wrongs 
+not righted,
+even championed,
+and rights ignored,
+and purges abound,
+and democracy 
+dies
+
+
+
+
+      select.form-control(ng-option="opt.name for opt in nsc.ccodes track by opt.id", ng-model="nsc.nat") 
+        option(value="")
+
+            small.text-info {{nsc.rtp == "per" ? (nsc.nat == "MYS" ? IC NO" : "PASSPORT") : "COMPANY REGISTRATION"}}
+
+
+[oon@localhost ~]$ history|grep firewall
+  544  sudo firewall-cmd --list-al-zones
+  545  sudo firewall-cmd --list-all-zones
+  613  man firewall-cmd
+  614  sudo firewall-cmd --get-services
+  970  sudo firewall-cmd --zone=public --add-port=18089/tcp --permanent
+  971  sudo firewall-command --reload
+  972  sudo firewall-cmd --reload
+ 1001  history|grep firewall
+[oon@localhost ~]$ firewall-cmd --zone=public --add-port=18080/tcp --permanent
+Authorization failed.
+Make sure polkit agent is running or run the application as superuser.
+[oon@localhost ~]$ sudo firewall-cmd --zone=public --add-port=18080/tcp --permanent
+[sudo] password for oon: 
+success
+[oon@localhost ~]$ sudo firewall-cmd --zone=public --add-port=18081/tcp --permanent
+success
+[oon@localhost ~]$ sudo firewall-cmd --reload
+success
+[oon@localhost ~]$ packet_write_wait: Connection to 202.171.45.196: Broken pipe
+Oons-MacBook-Pro:complete oonabdullah$ 
+
+
+select
+ acc
+,sno
+,sim
+,sta
+,(select sta 
+  from cacc 
+  where ssub.acc=cacc.acc
+  ) as acs
+,nme
+,(select nme 
+  from cacc 
+  where ssub.acc = cacc.acc
+  ) as acn
+, (select 
+  coalesce(adr,' ') 
+  from cacc 
+  where ssub.acc = cacc.acc
+  ) as adr 
+from ssub 
+where sno like :crit", [crit:v]);
+
+
+
+
+
+
+select acc,sno,sim,sta
+,(select sta form acc where ssub.acc=cacc.acc) as acs
+,nme
+,(select nme from cacc where ssub.acc = cacc.acc) as acn
+,(select coalesce(adr,' ') 
+  from  cacc 
+  where ssub.acc = cacc.acc) as adr 
+from ssub where sno like :crit", [crit:v])
+
+  <div ng-controller="ExampleController">
+  <form name="myForm">
+    <label for="singleSelect"> Single select: </label><br>
+    <select name="singleSelect" ng-model="data.singleSelect">
+      <option value="option-1">Option 1</option>
+      <option value="option-2">Option 2</option>
+    </select><br>
+
+    <label for="singleSelect"> Single select with "not selected" option and dynamic option values: </label><br>
+    <select name="singleSelect" id="singleSelect" ng-model="data.singleSelect">
+      <option value="">---Please select---</option> <!-- not selected / blank option -->
+      <option value="{{data.option1}}">Option 1</option> <!-- interpolation -->
+      <option value="option-2">Option 2</option>
+    </select><br>
+    <button ng-click="forceUnknownOption()">Force unknown option</button><br>
+    <tt>singleSelect = {{data.singleSelect}}</tt>
+
+    <hr>
+    <label for="multipleSelect"> Multiple select: </label><br>
+    <select name="multipleSelect" id="multipleSelect" ng-model="data.multipleSelect" multiple>
+      <option value="option-1">Option 1</option>
+      <option value="option-2">Option 2</option>
+      <option value="option-3">Option 3</option>
+    </select><br>
+    <tt>multipleSelect = {{data.multipleSelect}}</tt><br/>
+  </form>
+</div>
+
+
+#usearchtp1.tab-pane.fade.in.active
+  .row
+    .form-group
+      .col-md-8
+        input.form-control(ng-model="main.crit" type="text" placeholder="Account|SNO|SIM|Name...")
+      .col-md-4
+        .pull-right
+          button.btn.btn-danger.btn-sm(ng-click="main.look4(main.crit)")
+            |...
+            span.glyphicon-glyphicon-search(aria-hidden="true")
+          button.btn.btn-info.btn-sm(ng-click="main.newsub()")
+            | + 
+            span.glyphicon-glyphicon-search(aria-hidden="true")
+          button.btn.btn-danger.btn-sm(ng-click="main.reset()")
+            | /
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm">
+    Launch Normal Form
+</button>
+  #nsmodal.modal.fade(tabindex="-1",role="dialog",aria-labelledby="nsmodallabel",aria-hidden="true")
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(data-dismiss="modal")
+            span(aria-hidden="true") &times;
+            span.sr-only Close
+          h4#nsmodallabel.modal-title
+            | Register A Subscriber
+        .modal-body
+          form(role="form")
+            .form-group
+              label(for="i1") Label 1
+              input#i1.form-control(type="text",placeholder="Any text")
+            .form-group
+              label(for="i2") Label 2
+              input#i1.form-control(type="text",placeholder="Any text")
+            .checkbox
+              label
+                input(type="checkbox") Check this
+            button.btn.btn-default(type="submit") Submit
+        .modal-footer
+          button.btn.btn-default(data-dismiss="modal") Close
+          button.btn.btn-primary(type="button") Close
+  .row
+    .col-md-12
+      statinfo
+        strong
+          small.text-info &nbsp
+        br
+  .row
+    .col-md-12
+      include usubl.jade
+
+
+select(ng-model="main.setcc")
+  option(ng-repeat="opt in main.ccode", value="{{opt.id}}") {{opt.name}}
+
+        .dropdown
+          button.btn.btn-default.fropdown-toggle(id="ddm1",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false"){{main.selcc}}
+            span.selected {{main.setcc}}
+            span.caret
+          ul.dropdown-menu(aria-labelledby="ddm1")
+            li(ng-repeat="opt in main.ccodes")
+              a(ng-click="main.selcc(opt.id)") {{opt.name}}      
+
+
+    .directive('bsDropdown', BsDropdown);
+
+
+  function BsDropdown($compile) {
+    return {
+        restrict: 'E',
+        scope: {
+            items: '=dropdownData',
+            doSelect: '&selectVal',
+            selectedItem: '=preselectedItem'
+        },
+        link: function (scope, element, attrs) {
+            var html = '';
+            switch (attrs.menuType) {
+                case "button":
+                    html += '<div class="btn-group"><button class="btn button-label btn-default">Action</button><button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                    break;
+                default:
+                    html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
+                    break;
+            }
+            html += '<ul class="dropdown-menu"><li ng-repeat="item in items"><a tabindex="-1" data-ng-click="selectVal(item)">{{item.name}}</a></li></ul></div>';
+            element.append($compile(html)(scope));
+            for (var i = 0; i < scope.items.length; i++) {
+                if (scope.items[i].id === scope.selectedItem) {
+                    scope.bSelectedItem = scope.items[i];
+                    break;
+                }
+            }
+            scope.selectVal = function (item) {
+                switch (attrs.menuType) {
+                    case "button":
+                        $('button.button-label', element).html(item.name);
+                        break;
+                    default:
+                        $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
+                        break;
+                }
+                scope.doSelect({
+                    selectedVal: item.id
+                });
+            };
+            scope.selectVal(scope.bSelectedItem);
+        }
+    };
+  }
+
+
+
+      .form-group.col-md-6
+        label 
+          strong
+            small.text-info NATIONALITY
+            #select1.input-group-btn.select
+              button.btn.btn-default.dropdown-toggle(aria-expanded="false")
+                span.selected Malaysia
+                span.caret
+              ul.dropdown-menu.option(role="menu")
+                li(ng-repeat="opt in main.ccodes")
+                  a(ng-click="selectcc(opt.code)") {{opt.descr}}
+
+
+<div class="input-group-btn select" id="select1">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="selected">One</span> <span class="caret"></span></button>
+    <ul class="dropdown-menu option" role="menu">
+    <li id="1"><a href="#">One</a></li>
+    <li id="2"><a href="#">Two</a></li>
+    </ul>
+</div>
+
+
+
+#select1.input-group-btn.select
+  button.btn.btn-default.dropdown-toggle(aria-expanded="false")
+    span.selected Malaysia
+    span.caret
+  ul.dropdown-menu.option(role="menu")
+    li(ng-repeat="opt in main.ccodes")
+      a(ng-click="selectcc(opt.code)") {{opt.descr}}
+
+
+
+
+<div ng-controller="SubjectDropDownController">
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{selectedItem}}
+            <span class="caret">span>
+        button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li ng-repeat="a in subjects"><a ng-click="dropboxitemselected(a)">{{a}}a>li>
+        ul>
+    div>
+div>
+
+.dropdown
+  button.btn.btn-default.dropdown-toggle(type="button",id="dd1",)
+
+
+
+  <div ng-controller="SubjectDropDownController">
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{selectedItem}}
+            <span class="caret">span>
+        button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li ng-repeat="a in subjects"><a ng-click="dropboxitemselected(a)">{{a}}a>li>
+        ul>
+    div>
+div>
+
+        bs-dropdown(data-menu-type="button",select-val="selected_status = selectedVal",preselected-item="main.selcc" data-dropdown-data="main.ccodes")      
+
+
+.dropdown
+  button.btn.btn-default.fropdown-toggle(id="ddm1",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="true"){{main.selcc}}
+    span.caret
+  ul.dropdown-menu(aria-labelledby="ddm1")
+    li(ng-repeat="opt in main.ccodes")
+      a(ng-click="main.selcc(opt.id)") {{opt.name}}
+
+
+
+.container
+  .row
+    .col-sm-6
+      p |
+        No matching records
+      .row
+        a.btn.btn-info(ng-click="vm.close()" href="#") OK
+
+
+SELECT @row := @row + 1 as row, t.* FROM cacc t, (SELECT @row := 0) r
+
+SELECT @row_number:=@row_number+1 AS row_number,tid,acc FROM cacc, (SELECT @row_number:=0) AS t ORDER BY tid;
+
+
+
+#$s = `ls *local_mo`;
+%mm = ('JAN',1,'FEB',2,'MAR',3,'APR',4,'MAY',5,'JUN',6,'JUL',7,'AUG',8,'SEP',9,'OCT',10,'NOV',11,'DEC',12);
+@fs = split /\n/,`ls`;
+for $f (@fs) {
+  $doit = 0;
+  $sq = "-- $f\ninsert into susg values";
+if (1) {
+  open (my $fh,"<", $f) or die "$f nogo";
+  while (<$fh>) {
+    @c = split /,/;
+    if ($c[0] =~ /^(00)*6*0*(11*[0-9]{7})$/) { $c[0]="0".$2; }
+    $glc = "";
+    $doit = 1;
+    if ($f =~ /local_mo_call/) {
+      $ont = $c[10] == 1 ? "N" : "S";
+      $glc = "H".$ont."V";
+      $dm = substr($c[4],3,3);
+      $dd = sprintf("20%s-%02d-%02d %s",substr($c[4],7,2),$mm{$dm},substr($c[4],0,2),$c[5]);
+      #          tid,  kls,   sdt,  edt, upd,    ano,    bno, opr, geo,  uv0,  uv1, uv2,cg0,  cg1, cg2,sta, glc,    rf0,    rf1,    rf2,   fl0, fl1, fl2,
+      $sq .= "\n(null,'$glc','$dd',null,null,'$c[0]','$c[1]',null,null,$c[3], null,null,  0,$c[2],null,  0,null,'$c[6]','$c[7]','$c[9]',$c[10],null,null),";
+    } elsif ($f =~ /idd_call/) {
+      $glc = "HIV";
+      $dm = substr($c[4],3,3);
+      $dd = sprintf("20%s-%02d-%02d %s",substr($c[4],7,2),$mm{$dm},substr($c[4],0,2),$c[5]);
+      #          tid,  kls,   sdt,  edt, upd,    ano,    bno, opr, geo,  uv0,  uv1, uv2,cg0,  cg1, cg2,sta, glc,    rf0,    rf1,    rf2,fl0, fl1, fl2,
+      $sq .= "\n(null,'$glc','$dd',null,null,'$c[0]','$c[1]',null,null,$c[3], null,null,  0,$c[2],null,  0,null,'$c[6]','$c[7]','$c[9]',  0,null,null),";
+    } elsif ($f =~ /local_mo_sms/) {
+      $ont = $c[6] == 1 ? "N" : "S";
+      $glc = "H".$ont."S";
+      $dm = substr($c[3],3,3);
+      $dd = sprintf("20%s-%02d-%02d %s",substr($c[3],7,2),$mm{$dm},substr($c[3],0,2),$c[4]);
+      #          tid,  kls,   sdt,  edt, upd,    ano,    bno, opr, geo,uv0, uv1, uv2,cg0,  cg1, cg2,sta, glc, rf0, rf1, rf2,  fl0, fl1, fl2,
+      $sq .= "\n(null,'$glc','$dd',null,null,'$c[0]','$c[1]',null,null,  1,null,null,  0,$c[2],null,  0,null,null,null,null,$c[6],null,null),";
+    } elsif ($f =~ /idd_mo_sms/) {
+      $glc = "HIS";
+      $dm = substr($c[3],3,3);
+      $dd = sprintf("20%s-%02d-%02d %s",substr($c[3],7,2),$mm{$dm},substr($c[3],0,2),$c[4]);
+      #          tid,  kls,   sdt,  edt, upd,    ano,    bno, opr, geo,uv0, uv1, uv2,cg0,  cg1, cg2,sta, glc, rf0, rf1, rf2,fl0, fl1, fl2,
+      $sq .= "\n(null,'$glc','$dd',null,null,'$c[0]','$c[1]',null,null,  1,null,null,  0,$c[2],null,  0,null,null,null,null,  0,null,null),";
+    } elsif ($f =~ /local_MMS/) {
+      $glc = "HSM";
+      $dm = substr($c[3],3,3);
+      $dd = sprintf("20%s-%02d-%02d %s",substr($c[3],7,2),$mm{$dm},substr($c[3],0,2),$c[4]);
+      #          tid,  kls,   sdt,  edt, upd,    ano,    bno, opr, geo,uv0, uv1, uv2,cg0,  cg1, cg2,sta, glc, rf0, rf1, rf2,fl0, fl1, fl2,
+      $sq .= "\n(null,'$glc','$dd',null,null,'$c[0]','$c[1]',null,null,  1,null,null,  0,$c[2],null,  0,null,null,null,null,  0,null,null),";
+    } elsif ($f =~ /local_data/i ) {
+      $glc = "HND";
+      $dm = substr($c[3],3,3); $em = substr($c[4],3,3);
+      $dd = sprintf("20%s-%02d-%02d %s",substr($c[3],7,2),$mm{$dm},substr($c[3],0,2),substr($c[3],10,8));
+      $ed = sprintf("20%s-%02d-%02d %s",substr($c[4],7,2),$mm{$em},substr($c[4],0,2),substr($c[4],10,8));
+      #          tid,  kls,   sdt,  edt, upd,    ano, bno, opr, geo,  uv0,  uv1, uv2, cg0,  cg1, cg2, sta, glc, rf0, rf1, rf2, fl0, fl1, fl2,
+      $sq .= "\n(null,'$glc','$dd',null,null,'$c[0]',null,null,null,$c[1],$c[1],null,   0,$c[2],null,   0,null,null,null,null,null,null,null),";
+    } else {
+      $doit = 0;
+    }
+  }
+  if ($doit) {
+    chop $sq;
+    $sq .= "\n;\n";
+    if (1) { print "$sq"; } else { print "$f -- $glc \n"; }
+  }
+} else { print "$f\n"; }
+}
+
+
+=for comment
+
+(H|V)(N|S|I)(V|S|M|D|P)[<premium-code>]
+
+s/^\s+|\s+$//g      <-----trim string
+
+data--
+a_party_no                a_party_no                  0
+DATA_VOLUME Volume in KB  DATA_VOLUME Volume in KB    1
+CHARGED amount            charged in RM               2
+SESSION_DATE              session start time          3
+STOP_TIME                 session stop time           4
+TARIFFPLAN_ID             tariff plan ID              5
+
+voice--
+a_party_no              a_party_no              0
+b_party_no              b_party_no              1
+AIRTIME_AMNT            call charges            2
+call_duration           call duration in Sec    3
+CALL_DATE               called date             4
+CALL_TIME               called time             5
+VLRID                   VLR ID                  6
+CELL_ID                 CELL ID                 7
+Subs_Type(IMSI_NO)      sim type                8
+account_id              Unique account ID for each SIM. 9
+HOMETOHOME              On Net/Off Net Calls    10
+BUCKET_UNIT_VALUE       bundle charge(Plans)    11
+TARIFFPLAN_ID           Tariff plan ID          12
+
+sms--
+a_party_no              a_party_no    0
+b_party_no              b_party_no    1
+CHARGED SMS_CHARGE      in RM         2
+CALL_DATE Sms sent      timedate      3
+CALL_TIME Sms sent      datetime      4
+Subs_Type(IMSI_NO)      sim type      5
+HOMETOHOME              On Net/Off Net    6
+TARIFFPLAN_ID Tariff    plan ID       7
+
++-------+---------------+------+-----+---------+----------------+
+| Field | Type          | Null | Key | Default | Extra          |
++-------+---------------+------+-----+---------+----------------+
+| tid   | bigint(20)    | NO   | PRI | NULL    | auto_increment |
+| kls   | varchar(20)   | YES  |     | NULL    |                |
+| udt   | datetime      | YES  |     | NULL    |                |
+| upd   | varchar(20)   | YES  |     | NULL    |                |
+| ano   | varchar(20)   | YES  |     | NULL    |                |
+| bno   | varchar(20)   | YES  |     | NULL    |                |
+| opr   | varchar(20)   | YES  |     | NULL    |                |
+| geo   | varchar(20)   | YES  |     | NULL    |                |
+| vol   | decimal(12,3) | YES  |     | NULL    |                |
+| chg   | decimal(12,3) | YES  |     | NULL    |                |
+| sta   | tinyint(4)    | YES  |     | NULL    |                |
+| glc   | varchar(50)   | YES  |     | NULL    |                |
+| vl0   | decimal(12,3) | YES  |     | NULL    |                |
+| ch0   | decimal(12,3) | YES  |     | NULL    |                |
+| rf0   | varchar(20)   | YES  |     | NULL    |                |
+| rf1   | varchar(20)   | YES  |     | NULL    |                |
+| rf2   | varchar(20)   | YES  |     | NULL    |                |
+| fl0   | tinyint(4)    | YES  |     | NULL    |                |
+| fl1   | tinyint(4)    | YES  |     | NULL    |                |
+| fl2   | tinyint(4)    | YES  |     | NULL    |                |
++-------+---------------+------+-----+---------+----------------+
+tid, kls, udt, upd, ano, bno, opr, geo, vol, chg, sta, glc, vl0, ch0, rf0, rf1, rf2, fl0, fl1, fl2
+=,cut
+
+

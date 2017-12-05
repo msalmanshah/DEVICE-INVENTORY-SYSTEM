@@ -1,0 +1,24 @@
+.panel.with-nav-tabs.panel-defd
+  .panel-heading.clearfix
+    .pull-left
+      h6.panel-title.top10
+        strong.text-muted
+          | &nbsp&nbspPLAN ID: {{ plan.selectedtid }}&nbsp
+    .pull-right
+      ul.nav.nav-tabs
+        li(ui-sref-active="active")
+          a(ui-sref="plan.roam")
+            small
+              strong ROAMING
+        li(ui-sref-active="active")
+          a(ui-sref="plan.usa({tid: plan.selectedtid})")
+            small
+              strong USAGE
+        li(ui-sref-active="active")
+          a(ui-sref="plan.tid({tid: plan.selectedtid})")
+            small
+              strong CHARGES
+  .panel-body
+    .row
+      .col-md-12
+        div(ui-view="tabpage")

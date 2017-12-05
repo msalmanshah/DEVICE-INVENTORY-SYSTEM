@@ -1,0 +1,34 @@
+form.form-inline(name="doc")
+  .form-group.col-md-4
+    statinfo
+      strong
+        label
+          small.text-info DELIVERY ORDER NO : &nbsp
+        input.form-control(type="text",name="don", ng-model="deli.grn", required="true")
+        .help-block(ng-messages="doc.don.$error", ng-if="doc.don.$touched")
+          p(ng-message="required", style="color: red;") Delivey No is required.
+  .form-group.col-md-4
+    statinfo
+      strong
+        label
+          small.text-info VENDOR : &nbsp;
+        input.form-control(type="text",name="ven", ng-model="deli.vcd", required="true")   
+        .help-block(ng-messages="doc.ven.$error", ng-if="doc.ven.$touched")
+          p(ng-message="required", style="color: red;") Vendor is required.
+        br
+  .form-group.col-md-4
+    statinfo
+      strong
+        label
+          small.text-info LOCATION: &nbsp;
+      select#op1.form-control(ng-model="deli.loct")
+          option(value="",selected required hidden) Pick Location
+          option(ng-repeat="x in deli.loca",value="{{x.loc}}") {{x.loc}}
+  br
+  .form-group.col-md-12
+    button.btn.btn-success.btn-md(type="submit", value="Submit1", ng-click="deli.dec()", ng-disabled="doc.$invalid", ng-class="{disabled: doc.$invalid}") Submit
+    p {{deli.sto}}
+  br
+<hr>
+br
+div(ui-view="input")

@@ -1,0 +1,109 @@
+#bootabs.pl
+#
+# bootabs.pl [-t(l|r)] [-h=<header-title>] <name>|<pagename>[|<pagename>|...]
+#
+# -t		tabs position (l)eft or (r)ight
+#		header title positioned accordingly
+# -h=<hdr>	put <hdr> as the header title
+# -np           Do not overwrite tab content pages.
+#		Default behaviour would overite the tab pages.
+#
+#use Data::Dumper qw(Dumper);
+#print Dumper \@ARGV;
+
+$tpos = 1;
+$hd = "";
+$np = 0;
+$ne = 0;
+
+$ok = 1;
+do {
+	$p = shift @ARGV;
+#print Dumper \@ARGV;
+#print Dumper $p;
+	if ($p !~ /^-/ ) {
+		$ok = 0;
+		unshift @ARGV,$p;
+	} elsif ($p =~ /^-tl/) {
+		$tpos = 0;
+	} elsif ($p =~ /^-tr/) {
+		$tpos = 1;
+	} elsif ($p =~ /-h=(.*)$/) {
+		$hd = $1;
+	} elsif ($p =~ /^-np$/) {
+		$np = 1;
+	} elsif ($p =~ /^-ne$/) {
+		$ne = 1;
+	}
+
+} while $ok;
+#unshift @ARGV;
+
+@v = split /\|/,shift @ARGV;
+
+#print Dumper "---";
+#print Dumper \@v;
+
+$name = shift @v;
+$name = lc($name);
+
+$fn = $name.".jade";
+
+#print Dumper $fn;
+
+if (1) {
+open(FH, ">$fn") or die "died opening $fn";
+print FH ".panel.with-nav-tabs.panel-defd\n";
+print FH "  .panel-heading.clearfix\n";
+$ttp = $tpos ?  "    .pull-left \n" : "    .pull-right\n" ;
+print FH $ttp;
+print FH "      h6.panel-title.top10\n";
+print FH "        strong.text-muted\n";
+$ttl = "          | &nbsp&nbsp" . $hd . "\n";
+print FH $ttl;
+$tt  = $tpos ?  "    .pull-right\n" : "    .pull-left\n" ;
+print FH $tt;
+print FH "      ul.nav.nav-tabs\n";
+
+$p = 1;
+for $k (@v) {
+$uk = uc($k);
+$act = $p == 1 ? ".active" : "";
+print FH "        li$act\n";
+print FH "          a(href=\"".'#'.$name."p$p\", data-toggle=\"tab\")\n";
+print FH "            small\n";
+print FH "              strong $uk\n";
+$p++;
+}
+print FH "  .panel-body\n";
+print FH "    .row\n";
+print FH "      .col-md-12\n";
+print FH "        .tab-content\n";
+
+$p = 1;
+for $k (@v) {
+$fc = $name."p$p";
+$fp = $fc.".jade";
+$uk = uc($k);
+$act = $p == 1 ? ".in.active" : "";
+print FH "          include $fp\n";
+if ($np) { 
+$ndone=1;
+} elsif ($ne && (-e $fp)) {
+$ndone=1;
+} else {
+open(FP, ">$fp") or die "died opening tabpage $fp";
+print FP "//$fp\n//template for tab page\n";
+print FP "\#$fc.tab-pane.fade$act\n";
+print FP "  .row\n";
+print FP "    .col-md-12\n";
+print FP "      h6\n";
+print FP "        small\n";
+print FP "          | $uk\n";
+close FP;
+}
+$p++;
+}
+close FH;
+
+}

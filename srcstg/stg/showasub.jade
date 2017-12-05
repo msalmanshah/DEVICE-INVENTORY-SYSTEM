@@ -1,0 +1,53 @@
+//
+  p
+    | showing a nested view {{asub.sn}} {{asub.sndata[0].sn}}
+.row
+  .col-md-2
+    statinfo
+      strong
+        small.text-info ACCOUNT
+      br
+      | {{asub.sndata[0].ac}}
+  .col-md-2
+    statinfo
+      strong
+        small.text-info IC NO
+      br
+      | {{asub.sndata[0].ic}}
+  .col-md-2
+    statinfo
+      strong
+        small.text-info SNO
+      br
+      | {{asub.sndata[0].sn}}
+  .col-md-4
+    statinfo
+      strong
+        small.text-info STATUS
+      br
+      | {{asub.sndata[0].st}}
+  .col-md-2
+    button.btn.btn-danger.pull-right(type='submit')
+      | Edit
+      span.glyphicon.glyphicon-edit(aria-hidden='true')
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info NAME
+      br
+      | {{asub.sndata[0].nm}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info ADDRESS
+      br
+      | {{asub.sndata[0].ad}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info &nbsp
+      br
+        

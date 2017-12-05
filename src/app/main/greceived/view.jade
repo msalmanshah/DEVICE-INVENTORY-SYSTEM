@@ -1,0 +1,21 @@
+#view.modal.fade
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        button.close(data-dismiss="modal")
+          span(aria-hidden="true") &times;
+          span.sr-only Close
+        h4.modal-title.text-primary
+          strong
+            | Item Details
+        .modal-body
+          .row
+            .col-md-12
+             table.table.table-striped.table-float
+               tr
+                 th Serial No
+               tr(ng-repeat="x in exte.showser")
+                 td {{x.sno}}
+        .modal-footer
+          button.btn.btn-sm.btn-default(data-dismiss="modal", style="float: right;") Close 
+

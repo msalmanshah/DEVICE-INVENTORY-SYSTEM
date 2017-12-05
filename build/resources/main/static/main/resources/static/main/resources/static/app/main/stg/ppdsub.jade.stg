@@ -1,0 +1,55 @@
+.row
+  .col-md-3
+    statinfo
+      strong
+        small.text-info SNO
+      br
+      | {{ppdsub.dta.msisdn}} {{ppdsub.dta.sn}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info IMSI
+      br
+      | {{ppdsub.dta.imsi}}
+  .col-md-3
+    statinfo
+      strong
+        small.text-info STATUS
+      br
+      | {{ppdsub.dta.accountstatus | uppercase}}
+  .col-md-3
+    button.btn.btn-danger.btn-sm.pull-right(type='submit', ng-click="pstsub.addsub()")
+      | Move to Postpaid
+      //span.glyphicon.glyphicon-edit(aria-hidden='true')
+.row
+  .col-md-9
+    statinfo
+      strong
+        small.text-info SUBSCRIBER
+      br
+      | {{ppdsub.dta.firstname}} &nbsp; {{ppdsub.dta.lastname}}
+  .col-md-3 
+    statinfo
+      strong
+        small.text-info PREPAID ACC NO
+      br
+      | {{ppdsub.dta.accountid}}
+.row
+  .col-md-12
+    statinfo
+      strong
+        small.text-info ADDRESS
+      br
+      | {{ppdsub.dta.addr1}}
+      br
+      | {{ppdsub.dta.addr2}}
+      br
+      | {{ppdsub.dta.statecode}}
+      br
+      | {{ppdsub.dta.postalcode}}
+//
+  .row
+    .col-md-12
+      p
+        | {{ppdsub.abc}} --- {{ppdsub.dta}}
+ 
